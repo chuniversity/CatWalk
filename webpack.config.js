@@ -21,10 +21,10 @@ module.exports = {
         use: ["style-loader", "css-loader"],
         test: /.(css)$/
       },
-      {
-        use:'jsx-loader?harmony',
-        test:  /\.jsx$/
-      },
+      // {
+      //   use:'jsx-loader?harmony',
+      //   test:  /\.jsx$/
+      // },
       {
         test: /\.(eot|ttf|svg|woff|woff2|png|jpe?g|gif)$/i,
         use: [

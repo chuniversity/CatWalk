@@ -8,7 +8,7 @@ export default class App extends React.Component {
   render () {
     return (
     <div>
-      <p>Test</p>
+      <p>React is running</p>
     </div>
     )
   }

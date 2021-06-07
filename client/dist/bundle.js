@@ -10,13 +10,53 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./client/src/components/Product_Overview/index.jsx":
+/*!**********************************************************!*\
+  !*** ./client/src/components/Product_Overview/index.jsx ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\n\nconst Overview = () => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", null, \"Product Overview\"));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Overview);\n\n//# sourceURL=webpack://Project_CatWalk/./client/src/components/Product_Overview/index.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/Questions_Answers/index.jsx":
+/*!***********************************************************!*\
+  !*** ./client/src/components/Questions_Answers/index.jsx ***!
+  \***********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\n\nconst Questions_Answers = () => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", null, \"Product Questions_Answers\"));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Questions_Answers);\n\n//# sourceURL=webpack://Project_CatWalk/./client/src/components/Questions_Answers/index.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/Ratings_Reviews/index.jsx":
+/*!*********************************************************!*\
+  !*** ./client/src/components/Ratings_Reviews/index.jsx ***!
+  \*********************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\n\nconst Ratings_Reviews = () => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", null, \"Product Ratings_Reviews\"));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Ratings_Reviews);\n\n//# sourceURL=webpack://Project_CatWalk/./client/src/components/Ratings_Reviews/index.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/RelatedItems_Comparison/index.jsx":
+/*!*****************************************************************!*\
+  !*** ./client/src/components/RelatedItems_Comparison/index.jsx ***!
+  \*****************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\n\nconst RelatedItems_Comparison = () => {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", null, \"Product RelatedItems_Comparison\"));\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (RelatedItems_Comparison);\n\n//# sourceURL=webpack://Project_CatWalk/./client/src/components/RelatedItems_Comparison/index.jsx?");
+
+/***/ }),
+
 /***/ "./client/src/components/app.jsx":
 /*!***************************************!*\
   !*** ./client/src/components/app.jsx ***!
   \***************************************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": function() { return /* binding */ App; }\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {\n  constructor() {\n    super();\n    this.state = {};\n  }\n\n  render() {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", null, \"React is running\"));\n  }\n\n}\n\n//# sourceURL=webpack://Project_CatWalk/./client/src/components/app.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": function() { return /* binding */ App; }\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _Product_Overview_index_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Product_Overview/index.jsx */ \"./client/src/components/Product_Overview/index.jsx\");\n/* harmony import */ var _Ratings_Reviews_index_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Ratings_Reviews/index.jsx */ \"./client/src/components/Ratings_Reviews/index.jsx\");\n/* harmony import */ var _Questions_Answers_index_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Questions_Answers/index.jsx */ \"./client/src/components/Questions_Answers/index.jsx\");\n/* harmony import */ var _RelatedItems_Comparison_index_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./RelatedItems_Comparison/index.jsx */ \"./client/src/components/RelatedItems_Comparison/index.jsx\");\n\n\n\n\n\nclass App extends react__WEBPACK_IMPORTED_MODULE_0__.Component {\n  constructor() {\n    super();\n    this.state = {};\n  }\n\n  render() {\n    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", null, \"React is running\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n      id: \"Product Overview\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Product_Overview_index_jsx__WEBPACK_IMPORTED_MODULE_1__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n      id: \"Ratings and Reviews\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Ratings_Reviews_index_jsx__WEBPACK_IMPORTED_MODULE_2__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n      id: \"Questions and Answers\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Questions_Answers_index_jsx__WEBPACK_IMPORTED_MODULE_3__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n      id: \"Related Items and Comparison\"\n    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_RelatedItems_Comparison_index_jsx__WEBPACK_IMPORTED_MODULE_4__.default, null)));\n  }\n\n}\n\n//# sourceURL=webpack://Project_CatWalk/./client/src/components/app.jsx?");
 
 /***/ }),
 

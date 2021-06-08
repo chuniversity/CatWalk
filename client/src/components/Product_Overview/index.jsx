@@ -1,4 +1,5 @@
 import React from 'react';
+import { Typography } from '@material-ui/core';
 
 class Overview extends React.Component {
   constructor (props) {
@@ -8,7 +9,7 @@ class Overview extends React.Component {
   render () {
     return (
       <div>
-        <p>Product Overview</p>
+        <Typography variant="h6">Product Overview</Typography>
       </div>
     )
   }

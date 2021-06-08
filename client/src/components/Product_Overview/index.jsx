@@ -9,7 +9,7 @@ class Overview extends React.Component {
   render () {
     return (
       <div>
-        <Typography variant="h6">Product Overview</Typography>
+        <Typography variant="body1">Product Overview</Typography>
       </div>
     )
   }

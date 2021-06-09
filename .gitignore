@@ -1,3 +1,4 @@
 public/app.js
 node_modules
 *.DS_Store
+config.js

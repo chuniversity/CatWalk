@@ -1,46 +1,54 @@
 import React from 'react';
-import {Grid, Typography, Paper} from '@material-ui/core';
+import StyleSelector from './StyleSelector.jsx';
+import { Grid, Typography, Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-const ProductAppeal = ({product, styles, currentStyle}) => {
+const useStyles = makeStyles(theme => {
+  root: {
+    flexgrow: 1
+  }
+})
+
+const ProductAppeal = ({ product, styles, currentStyle }) => {
+
+  const classes = useStyles();
+
   return (
-    <>
-    <Grid container spacing={1} justify='center'>
-      <Grid item xs={12}>
-        <Typography variant='subtitle2'>Ratings</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant='subtitle1'>{product.category}</Typography>
-        <Typography variant='h3'>{product.name}</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography variant='subtitle2'>{currentStyle.sale_price? currentStyle.sale_price:currentStyle.original_price}</Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Paper>
-          <Typography variant='subtitle2'>StyleSelector</Typography>
-        </Paper>
-      </Grid>
-      <Grid item xs={12}>
-        <Grid container spacing={1} justify='center'>
-          <Grid item xs={12}>
-            <Paper>
+    <div className={classes.root}>
+      <Grid container spacing={1} justify='center'>
+        <Grid item xs={11}>
+          <Typography variant='subtitle2'>Ratings</Typography>
+        </Grid>
+        <Grid item xs={11}>
+          <Typography variant='h6'>{product.category}</Typography>
+          <Typography variant='h3'>{product.name}</Typography>
+        </Grid>
+        <Grid item xs={11}>
+          <Typography variant='subtitle1'>{`$ ${currentStyle.sale_price ? currentStyle.sale_price : currentStyle.original_price}`}</Typography>
+        </Grid>
+        <Grid item xs={11}>
+          <Typography varitant='h6'>Style > {currentStyle.name}</Typography>
+          <Grid container spacing={2}>
+            {styles.map((item, index) => {
+              return <StyleSelector style={item} key={index}/>
+            })}
+          </Grid>
+        </Grid>
+        <Grid item xs={11}>
+          <Grid container spacing={1} justify='center'>
+            <Grid item xs={12}>
               <Typography variant='subtitle2'>Select Size</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={4}>
-            <Paper>
+            </Grid>
+            <Grid item xs={4}>
               <Typography variant='subtitle2'>Quantity Selector</Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={8}>
-            <Paper>
+            </Grid>
+            <Grid item xs={8}>
               <Typography variant='subtitle2'>Add to Cart Button</Typography>
-            </Paper>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
-    </>
+    </div>
   )
 };
 

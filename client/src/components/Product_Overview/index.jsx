@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Grid, Paper } from '@material-ui/core';
+import { Typography, Grid, Paper, AppBar } from '@material-ui/core';
 import axios from 'axios';
 import access from '../../../../config.js';
 import ProductAppeal from './ProductAppeal.jsx';

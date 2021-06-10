@@ -44,12 +44,24 @@ class Overview extends React.Component {
       this.setState(
         this.state.currentStyle = newCurrentStyle
       );
-      // console.log('Product:  ', this.state.product);
-      // console.log('Styles:  ', this.state.styles);
-      // console.log('currentStyle:  ', this.state.currentStyle);
+      console.log('Product:  ', this.state.product);
+      console.log('Styles:  ', this.state.styles);
+      console.log('currentStyle:  ', this.state.currentStyle);
     }).catch(err => {
       console.error(err);
     });
+  }
+
+  changeStyle (newStyleId) {
+    let newCurrentStyle = {};
+    this.state.styles.map(item => {
+      if (item.style_id === newStyleId) {
+        newCurrentStyle = item;
+      }
+    });
+    this.setState(
+      this.state.currentStyle = newCurrentStyle
+    )
   }
 
   render () {
@@ -64,7 +76,7 @@ class Overview extends React.Component {
           </Grid>
           <Grid item xs={5}>
           <Paper >
-              <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle}/>
+              <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)}/>
             </Paper>
           </Grid>
           <Grid item xs={12}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import StyleSelector from './StyleSelector.jsx';
-import { Grid, Typography, Paper } from '@material-ui/core';
+import { Grid, Typography, Paper, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => {
@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => {
   }
 })
 
-const ProductAppeal = ({ product, styles, currentStyle }) => {
+const ProductAppeal = ({ product, styles, currentStyle, changeStyle }) => {
 
   const classes = useStyles();
 
@@ -27,10 +27,10 @@ const ProductAppeal = ({ product, styles, currentStyle }) => {
           <Typography variant='subtitle1'>{`$ ${currentStyle.sale_price ? currentStyle.sale_price : currentStyle.original_price}`}</Typography>
         </Grid>
         <Grid item xs={11}>
-          <Typography varitant='h6'>Style > {currentStyle.name}</Typography>
+          <Typography component='h6'><Box fontWeight='fontWeightMedium' display='inline'>Style > </Box> {currentStyle.name}</Typography>
           <Grid container spacing={2}>
             {styles.map((item, index) => {
-              return <StyleSelector style={item} key={index}/>
+              return <StyleSelector style={item} key={index} changeStyle={changeStyle} currentStyleId={currentStyle.style_id}/>
             })}
           </Grid>
         </Grid>

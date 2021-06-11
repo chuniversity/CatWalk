@@ -11,7 +11,15 @@ class Overview extends React.Component {
     this.state = {
       product: {},
       styles: [],
-      currentStyle: {}
+      currentStyle: {},
+      currentSize: {
+        size: ' '
+      },
+      allSizes: [],
+      currentQuantity: {
+        quantity: 0
+      },
+      arrQty: []
     }
   }
 
@@ -44,6 +52,14 @@ class Overview extends React.Component {
       this.setState(
         this.state.currentStyle = newCurrentStyle
       );
+      let newAllSizes = [];
+      const currentSkus = this.state.currentStyle.skus;
+      for (let key in currentSkus) {
+        newAllSizes.push(currentSkus[key].size);
+      }
+      this.setState(
+        this.state.allSizes = newAllSizes
+      )
       console.log('Product:  ', this.state.product);
       console.log('Styles:  ', this.state.styles);
       console.log('currentStyle:  ', this.state.currentStyle);
@@ -61,6 +77,48 @@ class Overview extends React.Component {
     });
     this.setState(
       this.state.currentStyle = newCurrentStyle
+    );
+    let newAllSizes = [];
+    const currentSkus = this.state.currentStyle.skus;
+    for (let key in currentSkus) {
+      newAllSizes.push(currentSkus[key].size);
+    }
+    this.setState(
+      this.state.allSizes = newAllSizes
+    );
+  }
+
+  changeSize (selectedSize) {
+    const newCurrentSize = {};
+    newCurrentSize.size = selectedSize;
+    this.setState(
+      this.state.currentSize = newCurrentSize
+    )
+    let newArrQty = [];
+    let qty = 0;
+    const currentSkus = this.state.currentStyle.skus;
+    for (let key in currentSkus) {
+      console.log('current size  ', this.state.currentSize);
+      console.log('current size  ', currentSkus[key].size);
+      if (this.state.currentSize.size === currentSkus[key].size) {
+        qty = currentSkus[key].quantity;
+      }
+    }
+    console.log('Number quntity:  ', qty);
+    for (let i = 0; i < qty; i++) {
+      newArrQty.push(i + 1);
+    }
+    this.setState(
+      this.state.arrQty = newArrQty
+    );
+    console.log('Array qunatity:  ', this.state.arrQty);
+  }
+
+  changeQuantity (selectedQuantity) {
+    const newCurrentQuantity = {};
+    newCurrentQuantity.quantity = selectedQuantity;
+    this.setState(
+      this.state.currentQuantity = newCurrentQuantity
     )
   }
 
@@ -76,7 +134,7 @@ class Overview extends React.Component {
           </Grid>
           <Grid item xs={5}>
           <Paper >
-              <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)}/>
+              <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty}/>
             </Paper>
           </Grid>
           <Grid item xs={12}>

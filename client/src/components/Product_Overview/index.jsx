@@ -98,20 +98,16 @@ class Overview extends React.Component {
     let qty = 0;
     const currentSkus = this.state.currentStyle.skus;
     for (let key in currentSkus) {
-      console.log('current size  ', this.state.currentSize);
-      console.log('current size  ', currentSkus[key].size);
       if (this.state.currentSize.size === currentSkus[key].size) {
         qty = currentSkus[key].quantity;
       }
     }
-    console.log('Number quntity:  ', qty);
     for (let i = 0; i < qty; i++) {
       newArrQty.push(i + 1);
     }
     this.setState(
       this.state.arrQty = newArrQty
     );
-    console.log('Array qunatity:  ', this.state.arrQty);
   }
 
   changeQuantity (selectedQuantity) {

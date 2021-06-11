@@ -2,18 +2,33 @@ import React from 'react';
 import StyleSelector from './StyleSelector.jsx';
 import SelectSize from './SelectSize.jsx';
 import SelectQuantity from './SelectQuantity.jsx';
-import { Grid, Typography, Paper, Box } from '@material-ui/core';
+import { Grid, Typography, Paper, Box, Fab, Checkbox } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
+import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
+import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles(theme => {
+const useStyles = makeStyles((theme) => ({
   root: {
     flexgrow: 1
-  }
-})
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
+  },
+}));
 
 const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize, currentSize, allSizes, currentQuantity, changeQuantity, arrQty }) => {
 
   const classes = useStyles();
+
+  const disableFunc = () => {
+    const notSizes = ['', 'Select Size'];
+    const notQty = [0, 'Select Qty'];
+    if (notSizes.includes(currentSize.size) || notQty.includes(currentQuantity.quantity)) {
+      return true;
+    }
+    return false;
+  }
 
   return (
     <div className={classes.root}>
@@ -42,8 +57,24 @@ const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize,
         <Grid item xs={5}>
           <SelectQuantity currentQuantity={currentQuantity} changeQuantity={changeQuantity} arrQty={arrQty}/>
         </Grid>
-        <Grid item xs={11}>
-          <Typography variant='subtitle2'>Add to Cart Button</Typography>
+        <Grid item xs={6}>
+          <Fab disabled={disableFunc()} variant='extended'>
+            <Grid container spacing={0} justify='center'>
+              <Grid item xs={10}>
+                <Typography variant='subtitle2'>Add to Cart</Typography>
+              </Grid>
+              <Grid item xs={2}>
+                <AddIcon ></AddIcon>
+              </Grid>
+            </Grid>
+          </Fab>
+        </Grid>
+        <Grid item xs={3}>
+          <Checkbox
+              icon={<FavoriteBorderRoundedIcon fontSize='large'/>}
+              checkedIcon={<FavoriteRoundedIcon fontSize='large' color="secondary"/>}
+              // onClick={}
+            />
         </Grid>
       </Grid>
     </div>

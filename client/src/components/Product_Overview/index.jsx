@@ -13,7 +13,7 @@ class Overview extends React.Component {
       styles: [],
       currentStyle: {},
       currentSize: {
-        size: ' '
+        size: ''
       },
       allSizes: [],
       currentQuantity: {
@@ -108,6 +108,12 @@ class Overview extends React.Component {
     this.setState(
       this.state.arrQty = newArrQty
     );
+    const newCurrentQuantity = {
+      quantity: 0
+    };
+    this.setState(
+      this.state.currentQuantity = newCurrentQuantity
+    )
   }
 
   changeQuantity (selectedQuantity) {
@@ -129,9 +135,7 @@ class Overview extends React.Component {
             </Paper>
           </Grid>
           <Grid item xs={5}>
-          <Paper >
-              <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty}/>
-            </Paper>
+            <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty}/>
           </Grid>
           <Grid item xs={12}>
             <Paper>

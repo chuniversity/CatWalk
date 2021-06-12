@@ -1,13 +1,15 @@
 import React from 'react';
-import { Typography, Grid, Paper, AppBar } from '@material-ui/core';
+import { Typography, Grid, Paper, AppBar, Divider, Box } from '@material-ui/core';
 import axios from 'axios';
 import access from '../../../../config.js';
 import ProductAppeal from './ProductAppeal.jsx';
+import CheckIcon from '@material-ui/icons/Check';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 class Overview extends React.Component {
   constructor (props) {
-    super(props
-);
+    super(props);
     this.state = {
       product: {},
       styles: [],
@@ -20,7 +22,16 @@ class Overview extends React.Component {
         quantity: 0
       },
       arrQty: []
-    }
+    };
+    this.classes = makeStyles((theme) => ({
+      root: {
+        border: `1px solid ${theme.palette.divider}`,
+        borderRadius: theme.shape.borderRadius,
+        '& hr': {
+          margin: theme.spacing(0, 0.5),
+        },
+      },
+    }));
   }
 
   componentDidMount () {
@@ -138,9 +149,22 @@ class Overview extends React.Component {
             <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty}/>
           </Grid>
           <Grid item xs={12}>
-            <Paper>
-              <Typography variant='subtitle1'>Description and Features</Typography>
-            </Paper>
+            <Grid container spacing={10} alignItems='center' justify='center' className={this.classes.root}>
+              <Grid item xs={6} >
+                <Typography variant='h6'>{this.state.product.slogan}</Typography>
+                <Typography align='justify' variant='body1'>{this.state.product.description}</Typography>
+              </Grid>
+              <Divider orientation='vertical' flexItem/>
+              <Grid item xs={4} >
+                {this.state.product.features === undefined ? <></> : this.state.product.features.map((item, index) => {
+                   return <Typography key={index} variant='subtitle1'>
+                  <CheckIcon display='inline'/>
+                  <Box fontWeight='fontWeightMedium' display='inline'>{item.feature}: </Box>
+                  {item.value}
+                  </Typography>
+                })}
+              </Grid>
+            </Grid>
           </Grid>
           <Grid item xs={12}>
             <Paper>

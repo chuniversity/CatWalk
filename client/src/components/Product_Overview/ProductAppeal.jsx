@@ -44,7 +44,7 @@ const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize,
           <Typography variant='h6'>{`$ ${currentStyle.sale_price ? currentStyle.sale_price : currentStyle.original_price}`}</Typography>
         </Grid>
         <Grid item xs={11}>
-          <Typography component='h5'><Box fontWeight='fontWeightMedium' display='inline'>Style > </Box> {currentStyle.name}</Typography>
+          <Typography variant='subtitle1'><Box fontWeight='fontWeightMedium' display='inline'>Style > </Box> {currentStyle.name}</Typography>
           <Grid container spacing={2}>
             {styles.map((item, index) => {
               return <StyleSelector style={item} key={index} changeStyle={changeStyle} currentStyleId={currentStyle.style_id}/>

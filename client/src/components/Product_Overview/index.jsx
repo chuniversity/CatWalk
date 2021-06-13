@@ -1,10 +1,13 @@
 import React from 'react';
 import { Typography, Grid, Paper, AppBar, Divider, Box } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import CheckIcon from '@material-ui/icons/Check';
 import axios from 'axios';
 import access from '../../../../config.js';
 import ProductAppeal from './ProductAppeal.jsx';
-import CheckIcon from '@material-ui/icons/Check';
-import { makeStyles } from '@material-ui/core/styles';
+import Gallery from './Gallery.jsx';
+
+
 
 
 class Overview extends React.Component {
@@ -141,9 +144,7 @@ class Overview extends React.Component {
         <Typography variant="body1">Product Overview</Typography>
         <Grid container spacing={1} justify='center'>
           <Grid item xs={7}>
-            <Paper >
-              <Typography variant='subtitle1' >Gallery</Typography>
-            </Paper>
+              <Gallery photos={this.state.currentStyle.photos}/>
           </Grid>
           <Grid item xs={5}>
             <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty}/>

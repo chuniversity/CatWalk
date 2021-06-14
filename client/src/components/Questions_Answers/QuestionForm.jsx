@@ -37,7 +37,7 @@ const QuestionForm = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  // /console.log(EnteredValue.target.value)
+  
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2>Ask Your Question</h2>

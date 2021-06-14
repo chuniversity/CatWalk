@@ -2,5 +2,9 @@ public/app.js
 node_modules
 *.DS_Store
 config.js
+<<<<<<< HEAD
 client/dist/bundle.js
 client/dist/bundle.js.LICENSE.txt
+=======
+bundle.js
+>>>>>>> 884c9eafcd638d10373cb7c7b5cf478eaa1ff3eb

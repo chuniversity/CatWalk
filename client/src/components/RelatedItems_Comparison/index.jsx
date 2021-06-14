@@ -1,9 +1,12 @@
 import React from 'react';
+import App from './R.I.Componets/App.jsx';
+
 
 const RelatedItems_Comparison = () => {
   return (
     <div>
-      <p>Product RelatedItems_Comparison</p>
+      Related Items
+      <App/>
     </div>
   )
 };

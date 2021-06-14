@@ -63,10 +63,8 @@ const AnswerForm = () => {
         <br></br>
         
         <TextField
-          id="filled-multiline-static"
-          label="Your nickname"
-          multiline
-          rows={8}
+          id="outlined-nickname"
+          label="Your Nickname"
           required
           placeholder="Example: jack543!"
           variant="outlined"
@@ -83,7 +81,7 @@ const AnswerForm = () => {
         
         <TextField
         id="outlined-email"
-        label="Your email"
+        label="Your Email"
         variant="outlined"
         type="email"
         required

@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchBar from "material-ui-search-bar";
 import axios from 'axios';
-// import access from '../../../../config.js';
+import access from '../../../../config.js';
 import QuestionForm from './QuestionForm.jsx';
 import AnswerForm from './AnswerForm.jsx';
 
@@ -164,25 +164,39 @@ let questions = [{
 ]
 
 
-
 //props needed?
 const Questions_Answers = () => {
   // const {questions, productId} = this.state || props;
   
-  // componentDidMount() {
-  //   axios
-  //     .get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}`, {
-  //       headers: {
-  //         'Authorization': access.token
-  //       }
-  //     })
-  //     .then(questions => {
-  //         this.setState({
-  //           questions: questions.results.data
-  //         })
+  // const getQuestions = () => {
+  //   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/${this.props.productId}`, {
+  //     headers: {
+  //       'Authorization': access.token
+  //     }
+  //   })
+  //   .then(questions => {
+  //       this.setState({
+  //         questions: questions.results.data
   //       })
-  //     .catch(err => console.error(err))
+  //     })
+  //   .catch(err => console.error(err))
   // }
+  
+  // const getQuestion = () => {
+  //   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/${this.props.productId}`, {
+  //     headers: {
+  //       'Authorization': access.token
+  //     }
+  //   })
+  //   .then(questions => {
+  //       this.setState({
+  //         questions: questions.results.data
+  //       })
+  //     })
+  //   .catch(err => console.error(err))
+  // }
+  
+  
   
   return (
     <>

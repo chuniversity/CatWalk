@@ -70,7 +70,7 @@ const QuestionForm = () => {
         <br></br>
         <TextField
         id="outlined-email"
-        label="Your email"
+        label="Your Email"
         variant="outlined"
         type="email"
         required

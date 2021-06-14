@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from "material-ui-search-bar";
+// import SearchBar from "material-ui-search-bar";
 import axios from 'axios';
 import access from '../../../../config.js';
 import QuestionForm from './QuestionForm.jsx';
@@ -28,7 +28,7 @@ Button for "Add a question +"
     onChange={(newValue) => this.setState({ value: newValue })}
     onRequestSearch={() => doSomethingWith(this.state.value)}
   />
-  
+
   SearchBar Properties
 Name	Type	Default	Description
 cancelOnEscape	bool		Whether to clear search on escape
@@ -43,7 +43,7 @@ placeholder	string	'Search'	Sets placeholder text for the embedded text field.
 searchIcon	node	<SearchIcon style={{ color: grey[500] }} />	Override the search icon.
 style	object	null	Override the inline-styles of the root element.
 value	string	''	The value of the text field.
-  
+
 **********************/
 
 /************
@@ -167,7 +167,7 @@ let questions = [{
 //props needed?
 const Questions_Answers = () => {
   // const {questions, productId} = this.state || props;
-  
+
   // const getQuestions = () => {
   //   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/${this.props.productId}`, {
   //     headers: {
@@ -181,7 +181,7 @@ const Questions_Answers = () => {
   //     })
   //   .catch(err => console.error(err))
   // }
-  
+
   // const getQuestion = () => {
   //   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/${this.props.productId}`, {
   //     headers: {
@@ -195,19 +195,19 @@ const Questions_Answers = () => {
   //     })
   //   .catch(err => console.error(err))
   // }
-  
-  
-  
+
+
+
   return (
     <>
       <h2>Questions and Answers</h2>
-      
-      <SearchBar
+
+      {/* <SearchBar
         placeholder='Search questions and answers...'
         onChange={(newValue) => 'this.setState({ value: newValue })'}
         onRequestSearch={() => 'doSomethingWith(this.state.value)'}
-      />
-      
+      /> */}
+
       <div id="questions">
         {questions.map((question, i) => {
           if (i < 4) {
@@ -220,9 +220,9 @@ const Questions_Answers = () => {
               <span style={{'fontStyle': 'italic'}}>
                 {`Helpful?  Yes (${question.question_helpfulness})  |  `}<AnswerForm/>
               </span>
-              
+
               <span>
-                {Object.entries(question.answers).map((answer, j) => { 
+                {Object.entries(question.answers).map((answer, j) => {
                   if (j < 2) {
                     return (
                     <ul key={answer[0]}>
@@ -238,7 +238,7 @@ const Questions_Answers = () => {
                         {`**photos** ${answer[1].photos}`}
                       </span>
                     </ul>
-                    ) 
+                    )
                   }
                 })}
                 {(Object.entries(question.answers).length > 2) ? <button onClick={console.log('click - load more answers\n TODO: when button is pressed, display more answers from list of answers for product')}>LOAD MORE ANSWERS</button> : null}

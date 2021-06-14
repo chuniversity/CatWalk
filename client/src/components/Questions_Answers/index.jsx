@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchBar from "material-ui-search-bar";
+// import SearchBar from "material-ui-search-bar";
 import axios from 'axios';
 import access from '../../../../config.js';
 import QuestionForm from './QuestionForm.jsx';
@@ -202,11 +202,11 @@ const Questions_Answers = () => {
     <>
       <h2>Questions and Answers</h2>
       
-      <SearchBar
+      {/* <SearchBar
         placeholder='Search questions and answers...'
         onChange={(newValue) => 'this.setState({ value: newValue })'}
         onRequestSearch={() => 'doSomethingWith(this.state.value)'}
-      />
+      /> */}
       
       <div id="questions">
         {questions.map((question, i) => {

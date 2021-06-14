@@ -9,8 +9,11 @@ import { CssBaseline, AppBar, Typography } from '@material-ui/core';
 export default class App extends React.Component {
   constructor () {
     super()
-    this.state = {}
+    this.state = {
+      currentProductId: 27189,
+    }
   }
+
   render () {
     return (
       <>
@@ -19,16 +22,16 @@ export default class App extends React.Component {
           <Typography variant="h5" >Project Catwalk</Typography>
         </AppBar>
         <div id="Product Overview">
-          <Product_Overview />
+          <Product_Overview productId={this.state.currentProductId} />
         </div>
         <div id="Ratings and Reviews">
-          <Ratings_Reviews />
+          <Ratings_Reviews productId={this.state.currentProductId} />
         </div>
         <div id="Questions and Answers">
-          <Questions_Answers />
+          <Questions_Answers productId={this.state.currentProductId} />
         </div>
         <div id="Related Items and Comparison">
-          <RelatedItems_Comparison />
+          <RelatedItems_Comparison productId={this.state.currentProductId} />
         </div>
       </>
     )

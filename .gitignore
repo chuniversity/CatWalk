@@ -3,4 +3,8 @@ node_modules
 *.DS_Store
 config.js
 client/dist/bundle.js
+<<<<<<< HEAD
 client/dist/bundle.js.LICENSE.txt
+=======
+client/dist/bundle.js.LICENSE.txt
+>>>>>>> 747c7bd1a7a9ba3efa7db65d08b90c94e26d36db

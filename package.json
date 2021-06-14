@@ -1,5 +1,5 @@
 {
-  "name": "CatWalk",
+  "name": "Project CatWalk",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -14,17 +14,15 @@
     "@fontsource/roboto": "^4.4.2",
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.58",
-    "@material/textfield": "^11.0.0",
+    "@material-ui/lab": "*",
     "@reduxjs/toolkit": "^1.5.1",
     "axios": "^0.21.1",
     "core-js": "^3.13.0",
     "express": "^4.17.1",
     "jsx-loader": "^0.13.2",
-    "material-ui-search-bar": "^1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-material-ui-form-validator": "^2.1.4",
+    "react-material-ui-carousel": "^2.2.6",
     "redux": "^4.1.0"
   },
   "devDependencies": {

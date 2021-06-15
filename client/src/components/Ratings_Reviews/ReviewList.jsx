@@ -11,10 +11,10 @@ const ReviewList = () => {
   return (
     <>
     <div>
-    
-     {dummydata.results.map((item) => (
-       <ReviewTile 
-          key={item.review_id}
+
+     {dummydata.results.map((item, index) => (
+       <ReviewTile
+          key={index}
           rating={item.rating}
           summary={item.summary}
           recommend={item.recommend}
@@ -24,7 +24,6 @@ const ReviewList = () => {
           reviewer_name={item.reviewer_name}
           helpfulness={item.helpfulness}
           photos={item.photos}
-    
        />
     ))}
     </div>

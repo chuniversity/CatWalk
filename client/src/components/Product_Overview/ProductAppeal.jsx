@@ -2,6 +2,7 @@ import React from 'react';
 import StyleSelector from './StyleSelector.jsx';
 import SelectSize from './SelectSize.jsx';
 import SelectQuantity from './SelectQuantity.jsx';
+import Ratings from './Rating.jsx';
 import { Grid, Typography, Paper, Box, Fab, Checkbox } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
@@ -34,7 +35,7 @@ const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize,
     <div className={classes.root}>
       <Grid container spacing={1} justify='center'>
         <Grid item xs={11}>
-          <Typography variant='subtitle1'>Ratings</Typography>
+          <Ratings ratingAverage={3.25}/>
         </Grid>
         <Grid item xs={11}>
           <Typography variant='h5'>{product.category}</Typography>
@@ -44,7 +45,7 @@ const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize,
           <Typography variant='h6'>{`$ ${currentStyle.sale_price ? currentStyle.sale_price : currentStyle.original_price}`}</Typography>
         </Grid>
         <Grid item xs={11}>
-          <Typography variant='subtitle1'><Box fontWeight='fontWeightMedium' display='inline'>Style > </Box> {currentStyle.name}</Typography>
+          <Typography variant='h6' fontWeight='200'><Box fontWeight='700' display='inline'>Style > </Box> {currentStyle.name}</Typography>
           <Grid container spacing={2}>
             {styles.map((item, index) => {
               return <StyleSelector style={item} key={index} changeStyle={changeStyle} currentStyleId={currentStyle.style_id}/>

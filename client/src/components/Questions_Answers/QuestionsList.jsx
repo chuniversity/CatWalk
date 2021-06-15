@@ -23,7 +23,7 @@ export default class QuestionsList extends React.Component {
       quantity: this.state.quantity + 2
     })
   }
-  
+
   componentDidMount() {
     this.isMounted = true;
     if (this.isMounted) {
@@ -32,18 +32,18 @@ export default class QuestionsList extends React.Component {
       });
     }
   }
-  
+
   componentWillUnmount() {
     this.isMounted = false;
   }
-  
+
   //deprecated method - consider refactoring during optimization phase
   UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       filtered: nextProps.questions
     });
   }
-  
+
   //appending the questions list rendered to screen based on searchbar input
   //once the input term reaches 3 characters of length it will filter down questions to only include questions with search term
   //if the input drops below 3 characters then the questions list will return back to normal
@@ -65,7 +65,7 @@ export default class QuestionsList extends React.Component {
       })
     }
   }
-  
+
   voteHelpful(e) {
     if(!this.state.voted && this.isMounted) {
       let questionId = e.target.value;
@@ -73,8 +73,8 @@ export default class QuestionsList extends React.Component {
       let config = {
         method: 'put',
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/${questionId}/helpful`,
-        headers: { 
-          'Content-Type': 'application/json', 
+        headers: {
+          'Content-Type': 'application/json',
           'authorization': access.token
         }
       };
@@ -89,17 +89,16 @@ export default class QuestionsList extends React.Component {
         .catch(err => console.error(err))
     }
   }
-  
+
   reportQuestion(e) {
     if(!this.state.reported && this.isMounted) {
-      console.log('helpful vote sent!');
       let questionId = e.target.value;
       // send put request to report a specific answer
       let config = {
         method: 'put',
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/${questionId}/report`,
-        headers: { 
-          'Content-Type': 'application/json', 
+        headers: {
+          'Content-Type': 'application/json',
           'authorization': access.token
         }
       };
@@ -114,7 +113,7 @@ export default class QuestionsList extends React.Component {
         .catch(err => console.error(err))
     }
   }
-  
+
   render() {
     const {questions} = this.props;
     return (<>

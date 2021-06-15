@@ -1,7 +1,6 @@
 import React from 'react';
 import RelatedProduct from './RelatedProduct.jsx';
 import axios from 'axios';
-import data from './sample_data.js';
 import Carousel from 'react-material-ui-carousel';
 import access from '../../../../../config.js';
 

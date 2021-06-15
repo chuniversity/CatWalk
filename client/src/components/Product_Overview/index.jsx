@@ -143,7 +143,7 @@ class Overview extends React.Component {
           <Grid item xs={7}>
               <Gallery photos={this.state.currentStyle.photos}/>
           </Grid>
-          <Grid item xs={5} alignItems='center' justify='center'>
+          <Grid item xs={5} >
             <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty}/>
           </Grid>
           <Grid item xs={12}>
@@ -163,11 +163,6 @@ class Overview extends React.Component {
                 })}
               </Grid>
             </Grid>
-          </Grid>
-          <Grid item xs={12}>
-            <Paper>
-              <Typography variant='subtitle1'>Media</Typography>
-            </Paper>
           </Grid>
         </Grid>
       </div>

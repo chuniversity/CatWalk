@@ -26,7 +26,9 @@ const SelectQuantity = ({ currentQuantity, changeQuantity, arrQty }) => {
     >
       <option value={'Select Quantity'}>Select Qty</option>
       {arrQty.map((item, index) => {
-        return <option key={index} value={item}>{item}</option>;
+        if (index < 16) {
+          return <option key={index} value={item}>{item}</option>;
+        }
       })}
     </Select>
   </FormControl>

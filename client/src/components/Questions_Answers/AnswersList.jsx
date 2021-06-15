@@ -15,25 +15,24 @@ export default class AnswersList extends React.Component {
     this.voteHelpful = this.voteHelpful.bind(this);
     this.reportAnswer = this.reportAnswer.bind(this);
   }
-  
-  
+
+
 
   moreAnswers () {
     this.setState({
       quantity: this.state.quantity + 2
     })
   }
-  
+
   voteHelpful(e) {
     if(!this.state.voted && this.isMounted) {
-      console.log('helpful vote sent!');
       let answerId = e.target.value;
       // send put request to increase helpfulness for a specific answer
       let config = {
         method: 'put',
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/answers/${answerId}/helpful`,
-        headers: { 
-          'Content-Type': 'application/json', 
+        headers: {
+          'Content-Type': 'application/json',
           'authorization': access.token
         }
       };
@@ -48,17 +47,16 @@ export default class AnswersList extends React.Component {
         .catch(err => console.error(err))
     }
   }
-  
+
   reportAnswer(e) {
     if(!this.state.reported && this.isMounted) {
-      console.log('helpful vote sent!');
       let answerId = e.target.value;
       // send put request to report a specific answer
       let config = {
         method: 'put',
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/answers/${answerId}/report`,
-        headers: { 
-          'Content-Type': 'application/json', 
+        headers: {
+          'Content-Type': 'application/json',
           'authorization': access.token
         }
       };
@@ -73,15 +71,15 @@ export default class AnswersList extends React.Component {
         .catch(err => console.error(err))
     }
   }
-  
+
   componentDidMount() {
     this.isMounted = true;
   }
-  
+
   componentWillUnmount() {
     this.isMounted = false;
   }
-  
+
   render() {
     const {question} = this.props;
     return (<>

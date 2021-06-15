@@ -20,7 +20,7 @@ export default class QuestionsList extends React.Component {
   render() {
     const {questions} = this.props;
     return (<>
-        {questions.map((question, i) => {
+        {questions.sort((a, b) => a.question_helpfulness < b.question_helpfulness).map((question, i) => {
           if (i < this.state.quantity) {
             return (
             <ul key={question.question_id}>

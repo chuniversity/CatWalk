@@ -148,12 +148,15 @@ export default class Questions_Answers extends React.Component {
           })
         }
       })
-      .catch(err => console.error(err))
+      
   }
 
   componentDidMount() {
     this.isMounted = true;
     this.getQuestions()
+    this.setState({
+      filtered: this.props.questions
+    })
   }
   
   componentWillUnmount() {
@@ -165,13 +168,13 @@ export default class Questions_Answers extends React.Component {
     return (
       <>
         <h2>Questions and Answers</h2>
-  
+        <input type="text" placeholder="Search..." />
         {/* <SearchBar
           placeholder='Search questions and answers...'
           onChange={(newValue) => 'this.setState({ value: newValue })'}
           onRequestSearch={() => 'doSomethingWith(this.state.value)'}
         /> */}
-        <QuestionsList questions={questions}/>
+        <QuestionsList questions={questions} />
         <QuestionForm />
       </>
     )

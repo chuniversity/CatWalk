@@ -74,10 +74,6 @@ class Overview extends React.Component {
       this.setState(
         this.state.allSizes = newAllSizes
       )
-      // return next axio for reviews
-      // console.log('Product:  ', this.state.product);
-      // console.log('Styles:  ', this.state.styles);
-      // console.log('currentStyle:  ', this.state.currentStyle);
     }).catch(err => {
       console.error(err);
     });

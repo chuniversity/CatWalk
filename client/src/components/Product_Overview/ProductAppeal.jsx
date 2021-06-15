@@ -8,7 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 import { makeStyles } from '@material-ui/core/styles';
-import { FacebookShareButton, PinterestShareButton, TwitterShareButton, FacebookIcon } from "react-share";
+import { FacebookShareButton, PinterestShareButton, TwitterShareButton, FacebookIcon, PinterestIcon, TwitterIcon } from "react-share";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,16 +16,16 @@ const useStyles = makeStyles((theme) => ({
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
-  },
-  shareMediaIcon: {
-    round: true,
-    size: 48
   }
 }));
 
 const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize, currentSize, allSizes, currentQuantity, changeQuantity, arrQty }) => {
 
   const classes = useStyles();
+
+  const shareUrl = 'https://github.com/thefozzies/FEC';
+  const shareTitle = `I am loving the ${product.name} from {the company name}`;
+  let mediaImg = currentStyle.photos === undefined ? 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80':currentStyle.photos[0].url ;
 
   const disableFunc = () => {
     const notSizes = ['', 'Select Size'];
@@ -83,11 +83,21 @@ const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize,
             />
         </Grid>
         <Grid item xs={11}>
-          <Grid container spacing={4}>
-            <Grid item xs={4}>
-              <FacebookShareButton url='wwww.facebook.com'>
+          <Grid container spacing={1} alignItems='center' justify='center'>
+            <Grid item xs={3}>
+              <FacebookShareButton url={shareUrl} quote={shareTitle} >
                 <FacebookIcon round={true} size={48} />
               </FacebookShareButton>
+            </Grid>
+            <Grid item xs={3}>
+              <PinterestShareButton url={shareUrl} media={mediaImg} description={shareTitle} >
+                <PinterestIcon round={true} size={48} />
+              </PinterestShareButton>
+            </Grid>
+            <Grid item xs={3}>
+              <TwitterShareButton url={shareUrl} title={shareTitle} >
+                <TwitterIcon round={true} size={48} />
+              </TwitterShareButton>
             </Grid>
           </Grid>
         </Grid>

@@ -24,12 +24,6 @@ const Ratings = ({ ratingAverage }) => {
             precision={0.25}
             readOnly
             display='inLine'
-            // onChange={(event, newValue) => {
-            //   setValue(newValue);
-            // }}
-            // onChangeActive={(event, newHover) => {
-            //   setHover(newHover);
-            // }}
           />
       </Grid>
       <Grid item xs={6}>

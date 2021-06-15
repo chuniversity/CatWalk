@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import access from '../../../../config.js';
 import QuestionForm from './QuestionForm.jsx';
-import QuestionsList from './QuestionsList.jsx';
+// import QuestionsList from './QuestionsList.jsx';
 
 /*
 Title - Questions & Answers
@@ -53,17 +53,17 @@ export default class Questions_Answers extends React.Component {
     this.isMounted = true;
     this.getQuestions()
   }
-  
+
   componentWillUnmount() {
     this.isMounted = false;
   }
-  
+
   render() {
     const {questions, answers} = this.state;
     return (
       <>
         <h2>Questions and Answers</h2>
-        <QuestionsList questions={questions} />
+        {/* <QuestionsList questions={questions} /> */}
         <QuestionForm />
       </>
     )

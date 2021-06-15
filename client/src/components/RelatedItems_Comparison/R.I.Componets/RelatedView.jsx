@@ -51,6 +51,8 @@ class RelatedView extends React.Component {
       <Carousel
       animation={"slide"}
       interval={4000}
+      autoPlay={false}
+
       >
         {this.state.relatedArray.map((product, i) => {
           return (

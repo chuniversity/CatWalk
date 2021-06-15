@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import Compare from './Compare.jsx';
 import { Card, CardMedia, Button, Typography } from '@material-ui/core'
+import Popup from 'reactjs-popup';
 import access from '../../../../../config.js';
 
 class RelatedProduct extends React.Component {
@@ -45,6 +47,11 @@ class RelatedProduct extends React.Component {
   render() {
     return (
       <Card>
+        <Button variant='contained'>
+          <Typography variant='body1'>
+            Add to Outfit
+          </Typography>
+        </Button>
         <CardMedia
           style={{
             height: '400px',
@@ -72,7 +79,13 @@ class RelatedProduct extends React.Component {
           <Typography variant='body1'>Default Price: ${this.state.defProduct.default_price}</Typography>
           </li>
         </ul>
-        <Button variant='contained'> Add to Outfit </Button>
+        <Popup trigger={<Button variant='contained'>
+            <Typography variant='body1'>
+              Compare!
+            </Typography>
+          </Button>} position="right center">
+           <Compare compare={this.state.defProduct} selected={this.props.selected}/>
+        </Popup>
       </Card>
     )
   }

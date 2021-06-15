@@ -1,5 +1,5 @@
 {
-  "name": "CatWalk",
+  "name": "Project CatWalk",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -23,6 +23,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-material-ui-carousel": "^2.2.6",
+    "reactjs-popup": "^2.0.4",
     "redux": "^4.1.0"
   },
   "devDependencies": {

@@ -1,18 +1,17 @@
 import React from 'react';
 import RelatedProduct from './RelatedProduct.jsx';
 import axios from 'axios';
-import data from './sample_data.js';
 import Carousel from 'react-material-ui-carousel';
 import access from '../../../../../config.js';
 
 
-//the selected item will be passed down from the main page via the reduz store
 
 class RelatedView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      relatedArray: []
+      relatedArray: [],
+      selected: {}
     }
   }
 
@@ -30,6 +29,21 @@ class RelatedView extends React.Component {
       }).catch ((err) => {
         console.error("error in GET request:", err);
       })
+
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.currentItem}`,
+      {
+        headers: {
+          'Authorization': access.token
+        }
+      })
+        .then((results) => {
+          this.setState({
+            selected: results.data
+          })
+        }).catch ((err) => {
+          console.error("error in GET request:", err);
+        })
+
   }
 
   render() {
@@ -37,11 +51,13 @@ class RelatedView extends React.Component {
       <Carousel
       animation={"slide"}
       interval={4000}
+      autoPlay={false}
+
       >
         {this.state.relatedArray.map((product, i) => {
           return (
-            <RelatedProduct item={product} key={i}/>
-            )
+            <RelatedProduct item={product} key={i} selected={this.state.selected}/>
+          )
           })
         }
       </Carousel>

@@ -50,7 +50,7 @@ class RelatedProduct extends React.Component {
         'Authorization': access.token
       }
     }).then((results) => {
-      console.log(results.data.ratings);
+      // console.log(results.data.ratings);
       let ratings = results.data.ratings;
       var responseTotal = 0;
       let scoreTotal = 0;
@@ -61,7 +61,7 @@ class RelatedProduct extends React.Component {
       }
 
       let result = scoreTotal / responseTotal;
-      console.log(result)
+      // console.log(result)
       this.setState({
         defRating: result
       })
@@ -75,7 +75,7 @@ class RelatedProduct extends React.Component {
   render() {
     return (
       <Card>
-        <Grid container={12} spacing={1}>
+        <Grid container spacing={1}>
         <Grid item xs={6}>
           <Button variant='contained'>
             <Typography variant='body1'>

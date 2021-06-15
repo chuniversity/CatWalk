@@ -168,11 +168,6 @@ class Overview extends React.Component {
               </Grid>
             </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <Paper>
-              <Typography variant='subtitle1'>Media</Typography>
-            </Paper>
-          </Grid>
         </Grid>
       </div>
     )

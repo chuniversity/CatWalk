@@ -8,6 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 import FavoriteBorderRoundedIcon from '@material-ui/icons/FavoriteBorderRounded';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 import { makeStyles } from '@material-ui/core/styles';
+import { FacebookShareButton, PinterestShareButton, TwitterShareButton, FacebookIcon } from "react-share";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,6 +17,10 @@ const useStyles = makeStyles((theme) => ({
   extendedIcon: {
     marginRight: theme.spacing(1),
   },
+  shareMediaIcon: {
+    round: true,
+    size: 48
+  }
 }));
 
 const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize, currentSize, allSizes, currentQuantity, changeQuantity, arrQty }) => {
@@ -76,6 +81,15 @@ const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize,
               checkedIcon={<FavoriteRoundedIcon fontSize='large' color="secondary"/>}
               // onClick={}
             />
+        </Grid>
+        <Grid item xs={11}>
+          <Grid container spacing={4}>
+            <Grid item xs={4}>
+              <FacebookShareButton url='wwww.facebook.com'>
+                <FacebookIcon round={true} size={48} />
+              </FacebookShareButton>
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </div>

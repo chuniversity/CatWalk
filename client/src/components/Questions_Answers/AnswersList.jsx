@@ -1,4 +1,5 @@
 import React from 'react';
+import { Zoom } from '@material-ui/core';
 
 export default class AnswersList extends React.Component {
   constructor(props) {
@@ -8,6 +9,7 @@ export default class AnswersList extends React.Component {
     }
     this.moreAnswers = this.moreAnswers.bind(this);
   }
+  
 
   moreAnswers () {
     this.setState({
@@ -32,12 +34,16 @@ export default class AnswersList extends React.Component {
             <br></br>
             <span>
               {answer[1].photos.map((photo, k) => {
-                return <img src={photo} key={k} style={{
+                return <img
+                src={photo}
+                key={`img_${k}`}
+                style={{
                   'border': '1px solid #ddd',
-                  'border-radius': '4px',
+                  'borderRadius': '4px',
                   'padding': '5px',
-                  'width': '150px'
-                }}/>
+                  'height': '200px'
+                }}
+                />
               })}
             </span>
           </ul>

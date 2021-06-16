@@ -1,5 +1,5 @@
 const obj = {
-  token: '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'
+  token: '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'
 };
 
 export default obj;

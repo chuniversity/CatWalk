@@ -30,7 +30,7 @@ const ReviewTile = (props) => {
       </div>
       {rec}
       {res}
-      <div className={cl.rtileHelpful}>Helpful? <span class={cl.rtileYes}><a href="#">Yes</a>({props.helpfulness})</span> | <span class={cl.rtileReport}><a href="#">Report</a></span>
+      <div className={cl.rtileHelpful}>Helpful? <span className={cl.rtileYes}><a href="#">Yes</a>({props.helpfulness})</span> | <span className={cl.rtileReport}><a href="#">Report</a></span>
       </div>
       <div className={cl.rtileLinebreak}><hr></hr></div>
      

@@ -41,7 +41,7 @@ const QuestionForm = () => {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2>Ask Your Question</h2>
-      <h4>{`About the ${'[currentProductNameHere]'}`}</h4>
+      <h4>{`About: ${'[currentProductNameHere]'}`}</h4>
       <FormControl action="someURL" method="post" >
         
         <TextField
@@ -85,7 +85,7 @@ const QuestionForm = () => {
   return (
     <>
       <button onClick={handleOpen}>
-        ADD A QUESTION +
+        Ask question
       </button>
       <Modal open={open} onClose={handleClose}>
         {body}

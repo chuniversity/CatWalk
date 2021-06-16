@@ -3,6 +3,7 @@ import RelatedView from './RelatedView.jsx';
 
 export default class App extends React.Component {
   constructor (props) {
+    // console.log(props.productId)
     super(props)
     this.state = {
       currentItem: 27189
@@ -11,7 +12,7 @@ export default class App extends React.Component {
   render () {
     return (
     <div>
-      <RelatedView currentItem={this.state.currentItem}/>
+      <RelatedView currentItem={this.props.productId}/>
     </div>
     )
   }

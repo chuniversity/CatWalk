@@ -135,7 +135,52 @@ class Overview extends React.Component {
     )
   }
 
+  changeOnProductId () {
+    if (this.props.productId !== this.state.product.id && this.state.product.id !== undefined) {
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}`, {
+        headers: {
+          'Authorization': access.token
+        }
+      }).then(data => {
+        const newProduct = data.data;
+        this.setState(
+          this.state.product = newProduct
+        );
+        return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`, {
+          headers: {
+            'Authorization': access.token
+          }
+        })
+      }).then( data => {
+        const newStyles = data.data.results;
+        let newCurrentStyle = {};
+        this.setState(
+          this.state.styles = newStyles
+        );
+        newStyles.map(item => {
+          if (item['default?']) {
+            newCurrentStyle = item;
+          }
+        });
+        this.setState(
+          this.state.currentStyle = newCurrentStyle
+        );
+        let newAllSizes = [];
+        const currentSkus = this.state.currentStyle.skus;
+        for (let key in currentSkus) {
+          newAllSizes.push(currentSkus[key].size);
+        }
+        this.setState(
+          this.state.allSizes = newAllSizes
+        )
+      }).catch(err => {
+        console.error(err);
+      });
+    }
+  }
+
   render () {
+    this.changeOnProductId();
     return (
       <div>
         <Typography variant="body1">Product Overview</Typography>

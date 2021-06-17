@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core';
 const reviewStyles = makeStyles({
   rrCont: {
     marginTop: '60px',
-    marginLeft: '225px',
   },
   rrTitleCont: {},
   rrBoxCont: {
@@ -38,13 +37,14 @@ const reviewStyles = makeStyles({
     display: 'grid',
     gridTemplateColumns: '25% 70%',
     gridGap: '0px',
+    marginTop: '15px',
   },
   starsBoxImg: {
     height: '27px',
     width: '180px',
   },
   starsBoxL: {
-    fontSize: '.8em',
+    fontSize: '.9em',    
   },
   starsBoxLText: {
     textDecoration: 'none',
@@ -137,6 +137,12 @@ const reviewStyles = makeStyles({
   rtileLinebreak: {
     marginTop: '17px',
   },
+
+  
+
 });
+
+
+
 
 export default reviewStyles;

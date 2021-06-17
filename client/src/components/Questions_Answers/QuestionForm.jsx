@@ -1,5 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
 import { FormControl, Button, Modal, makeStyles, TextField } from '@material-ui/core';
+import access from '../../../../config.js';
 
 
 //set default position of modal pop up to be middle of screen
@@ -14,7 +17,7 @@ const getModalStyle = () => {
   };
 }
 
-//styling for modal pop up
+// styling for modal pop up
 const useStyles = makeStyles(theme => ({
   paper: {
     position: "absolute",
@@ -24,8 +27,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-const QuestionForm = () => {
+//props.productId 
+const QuestionForm = (props) => {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
@@ -38,14 +41,42 @@ const QuestionForm = () => {
     setOpen(false);
   };
   
+  // POST Request to add question to API
+  const addQuestion = () => {
+    // let data = {
+    //   "body": `${body}`,
+    //   "name": `${name}`,
+    //   "email": `${email}`,
+    //   "photos": `${photos}`
+    // };
+
+    // let config = {
+    //   method: 'post',
+    //   url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/27189/answers',
+    //   headers: { 
+    //     'authorization': access.token
+    //   },
+    //   data : data
+    // };
+
+    // axios(config)
+    //   .then(function (response) {
+    //     console.log(JSON.stringify(response.data));
+    //     ReactDOM.findDOMNode('addQuestionForm').reset()
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+  }
+  
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2>Ask Your Question</h2>
-      <h4>{`About: ${'[currentProductNameHere]'}`}</h4>
-      <FormControl action="someURL" method="post" >
+      <h4>{`About: [currentProduct - ${props.productId}]`}</h4>
+    <FormControl id="addQuestionForm" onSubmit={addQuestion}>
         
         <TextField
-          id="filled-multiline-static"
+          id="filled-multiline-static-question"
           label="Your Question"
           multiline
           required
@@ -77,16 +108,16 @@ const QuestionForm = () => {
         placeholder="Example: jack@email.com"
         />
         <br></br>
-        <button type="submit">Submit Question</button>
+        <Button type="submit" variant="outlined" style={{'backgroundColor': '#d5d2d2'}}>Submit Question</Button>
       </FormControl>
     </div>
   );
   
   return (
     <>
-      <button onClick={handleOpen}>
-        Ask question
-      </button>
+      <Button onClick={handleOpen} variant="outlined">
+        Ask question +
+      </Button>
       <Modal open={open} onClose={handleClose}>
         {body}
       </Modal>

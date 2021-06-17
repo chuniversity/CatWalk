@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormControl, Button, Modal, makeStyles, TextField } from '@material-ui/core';
+import access from '../../../../config.js';
 
 
 //set default position of modal pop up to be middle of screen
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const AnswerForm = () => {
+const AnswerForm = (props) => {
   const classes = useStyles();
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
@@ -40,7 +41,7 @@ const AnswerForm = () => {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2>Submit your Answer</h2>
-      <h4>{`${'[Product Name]'}: ${'[Question Body]'}`}</h4>
+      <h4>{`${'[Product Name]'}: ${props.questionBody}`}</h4>
       <FormControl action="someURL" method="post" >
 
         <TextField
@@ -104,16 +105,16 @@ const AnswerForm = () => {
 
         <br></br>
 
-        <button type="submit">Submit Answer</button>
+        <Button type="submit" variant="outlined" style={{'backgroundColor': '#d5d2d2'}}>Submit Answer</Button>
       </FormControl>
     </div>
   );
 
   return (
     <>
-      <button onClick={handleOpen}>
+      <Button onClick={handleOpen} size="small">
         Add Answer
-      </button>
+      </Button>
       <Modal open={open} onClose={handleClose}>
         {body}
       </Modal>

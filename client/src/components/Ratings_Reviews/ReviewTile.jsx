@@ -1,8 +1,6 @@
 import React from 'react';
-import reviewStyles from './reviewStyles.js'
-
-
-
+import reviewStyles from './reviewStyles.js';
+import Rating from '@material-ui/lab/Rating';
 
 const ReviewTile = (props) => {
   const cl = reviewStyles();
@@ -18,7 +16,14 @@ const ReviewTile = (props) => {
   return (
     <div className={cl.rtileCont}>
       <div className={cl.rtileStaruserCont}>
-        <div className="rtile-star"><img src="lib/stars.jpg"></img></div>
+        <div className="rtile-star">
+        <Rating
+          name="simple-controlled"
+          value={props.rating}
+          precision={0.25}
+          readOnly
+        />
+        </div>
         {/* <div className="rtile-star"><Rating /></div> */}
         <div className={cl.rtileUser}>{props.reviewer_name}, {months[month]} {date}, {year}</div>
       </div>

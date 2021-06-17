@@ -10,7 +10,10 @@ const RelatedItems_Comparison = (props) => {
       <Typography variant='h5'>
       Related Items
       </Typography>
-      <App productId={props.productId} changeCurrentProduct={props.changeCurrentProduct}/>
+      <App productId={props.productId}
+        changeCurrentProduct={props.changeCurrentProduct}
+        outfit={props.outfit}
+      />
     </div>
   )
 };

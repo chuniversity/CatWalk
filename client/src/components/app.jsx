@@ -11,6 +11,7 @@ export default class App extends React.Component {
     super()
     this.state = {
       currentProductId: 27189,
+      outfit: [27189,  27190]
     }
   }
 
@@ -38,7 +39,11 @@ export default class App extends React.Component {
           <Questions_Answers productId={this.state.currentProductId} />
         </div>
         <div id="Related Items and Comparison">
-          <RelatedItems_Comparison productId={this.state.currentProductId} changeCurrentProduct={this.changeCurrentProduct.bind(this)}/>
+          <RelatedItems_Comparison
+            productId={this.state.currentProductId}
+            changeCurrentProduct={this.changeCurrentProduct.bind(this)}
+            outfit={this.state.outfit}
+          />
         </div>
       </>
     )

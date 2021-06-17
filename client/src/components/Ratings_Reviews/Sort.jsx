@@ -7,16 +7,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 
 
-const Sort = () => {
+const Sort = ({handleSort}) => {
 
   return (
    
-  <select>
-        <option value="albums">relevance</option>
-        <option value="members">newest</option>
-        <option value="formed">oldest</option>
-        <option value="formed">highest</option>
-        <option value="formed">lowest</option>
+  <select onChange={(value) => handleSort(value)}>
+        <option value="relevance">relevance</option>
+        <option value="newest">newest</option>
+        <option value="helpful">helpful</option>
  </select>
   )
 };

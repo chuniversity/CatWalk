@@ -59,7 +59,7 @@ export default class Questions_Answers extends React.Component {
         <h2>Questions and Answers</h2>
         <QuestionsList questions={questions} productName={this.props.productName}/>
         {/* Need to pass in current product name to question form as props to be used within the modal form pop up for adding a  question */}
-        <QuestionForm productId={this.props.productId}/>
+        <QuestionForm productId={this.props.productId} productName={this.props.productName}/>
       </>
     )
   }

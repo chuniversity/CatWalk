@@ -88,7 +88,7 @@ const QuestionForm = (props) => {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2>Ask Your Question</h2>
-      <h4>{`About: [currentProduct - ${props.productId}]`}</h4>
+      <h4>{`About: ${props.poductName}`}</h4>
     <form id="addQuestionForm" onSubmit={addQuestion}>
         
         <input

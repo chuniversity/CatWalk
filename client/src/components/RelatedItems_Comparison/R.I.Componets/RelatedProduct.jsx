@@ -52,10 +52,6 @@ class RelatedProduct extends React.Component {
         'Authorization': access.token
       }
     }).then((results) => {
-<<<<<<< HEAD
-=======
-      // console.log(results.data.ratings);
->>>>>>> 36e1b7739ef5bf5954635929bc60d17bb8f307e7
       let ratings = results.data.ratings;
       var responseTotal = 0;
       let scoreTotal = 0;
@@ -65,10 +61,6 @@ class RelatedProduct extends React.Component {
         scoreTotal += key * temp;
       }
       let result = scoreTotal / responseTotal;
-<<<<<<< HEAD
-=======
-      // console.log(result)
->>>>>>> 36e1b7739ef5bf5954635929bc60d17bb8f307e7
       this.setState({
         defRating: result
       })
@@ -77,6 +69,7 @@ class RelatedProduct extends React.Component {
           console.error("error @ review get:" , err);
     });
   }
+ // commit for stuff
 
   changeCurrentProduct () {
      this.props.changeCurrentProduct(this.state.defProduct.id);
@@ -85,19 +78,6 @@ class RelatedProduct extends React.Component {
   render() {
     return (
       <Card>
-<<<<<<< HEAD
-
-=======
-        <Grid container spacing={1}>
-        <Grid item xs={6}>
-          <Button variant='contained'>
-            <Typography variant='body1'>
-              Add to Outfit
-            </Typography>
-          </Button>
-        </Grid>
-        <Grid item xs={6}>
->>>>>>> 36e1b7739ef5bf5954635929bc60d17bb8f307e7
         <Rating
           name="simple-controlled"
           value={this.state.defRating}

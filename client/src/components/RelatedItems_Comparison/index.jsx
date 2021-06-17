@@ -4,12 +4,16 @@ import { Typography } from '@material-ui/core'
 
 
 const RelatedItems_Comparison = (props) => {
+  //console.log('indexcheck:', props.changeCurrentProduct)
   return (
     <div>
       <Typography variant='h5'>
       Related Items
       </Typography>
-      <App productId={props.productId}/>
+      <App productId={props.productId}
+        changeCurrentProduct={props.changeCurrentProduct}
+        outfit={props.outfit}
+      />
     </div>
   )
 };

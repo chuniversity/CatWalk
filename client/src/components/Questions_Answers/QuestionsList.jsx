@@ -150,9 +150,15 @@ export default class QuestionsList extends React.Component {
   }
 
   render() {
-    const {questions} = this.props;
+    const {questions, productName} = this.props;
     return (<div id="questionsList">
-      <input style={{'width': '300px'}} type="text" placeholder={`Have a question? Search (${questions.length}) questions asked...`} onChange={this.handleChange}/>
+      <input
+      style={{'width': '300px'}}
+      type="text"
+      placeholder={`Have a question? Search (${questions.length}) questions asked...`}
+      onChange={this.handleChange}
+      />
+      
       {this.state.filtered.sort((a, b) => a.question_helpfulness < b.question_helpfulness).map((question, i) => {
         //after filtering questions by search term (optionally) and then by helpfulness ratings
         //render only questions that will stay under the current quantity cap that can only be increased when a user clicks "show more"
@@ -166,9 +172,9 @@ export default class QuestionsList extends React.Component {
             <span>
               <Button onClick={this.voteHelpful} value={question.question_id} size="small" color="primary">Helpful? Yes ({question.question_helpfulness})</Button>
               <Button onClick={this.reportQuestion} value={question.question_id} size="small" color="secondary">Report</Button>
-              <AnswerForm questionBody={question.question_body}/>
+              <AnswerForm questionBody={question.question_body} questionId={question.question_id} productName={productName}/>
             </span>
-            <AnswersList question={question}/>
+            <AnswersList question={question} />
           </ul>
           )
         }

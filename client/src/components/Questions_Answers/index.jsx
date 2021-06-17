@@ -1,5 +1,5 @@
-/* Still to do:
-modal/form submission handling -> (gather user inputs upon submission and pass into an axios POST request, then refresh list after POST finishes)
+/* Still to do / optional to do:
+DONE: modal/form submission handling -> (gather user inputs upon submission and pass into an axios POST request, then refresh list after POST finishes)
 refresh "helpfulness Yes (2)" button when clicked/voted on a question or answer that the user found helpful
 remove question or answer when its reported (refresh questions list)
 fix the "show less questions" and "hide questions" coding logic so they don't dissapear when questions list rendered reach max limit of questions available
@@ -19,7 +19,7 @@ export default class Questions_Answers extends React.Component {
     this.state = {
       questions: [],
       answers: [],
-      questionId: 0
+      questionId: 0,
     }
     this.getQuestions = this.getQuestions.bind(this);
   }
@@ -57,7 +57,7 @@ export default class Questions_Answers extends React.Component {
     return (
       <>
         <h2>Questions and Answers</h2>
-        <QuestionsList questions={questions} />
+        <QuestionsList questions={questions} productName={this.props.productName}/>
         {/* Need to pass in current product name to question form as props to be used within the modal form pop up for adding a  question */}
         <QuestionForm productId={this.props.productId}/>
       </>

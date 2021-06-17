@@ -13,36 +13,36 @@ class RelatedView extends React.Component {
       relatedArray: [],
       selected: {}
     }
+  console.log('Relvated View check:', this.props.changeCurrentProduct)
   }
 
   componentDidMount () {
+///////Realted Array //////////
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.currentItem}/related`,
     {
       headers: {
         'Authorization': access.token
       }
-    })
-      .then((results) => {
+    }).then((results) => {
         this.setState({
           relatedArray: results.data
         })
-      }).catch ((err) => {
+    }).catch ((err) => {
         console.error("error in GET request:", err);
-      })
-
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.currentItem}`,
-      {
-        headers: {
-          'Authorization': access.token
-        }
-      })
-        .then((results) => {
-          this.setState({
-            selected: results.data
-          })
-        }).catch ((err) => {
-          console.error("error in GET request:", err);
+    })
+/////// PRODUCT REQUEST ///////////
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.currentItem}`,
+    {
+      headers: {
+        'Authorization': access.token
+      }
+    }).then((results) => {
+        this.setState({
+          selected: results.data
         })
+    }).catch ((err) => {
+        console.error("error in GET request:", err);
+    })
 
   }
 
@@ -51,12 +51,10 @@ class RelatedView extends React.Component {
       <Carousel
       animation={"slide"}
       interval={4000}
-      autoPlay={false}
-
       >
         {this.state.relatedArray.map((product, i) => {
           return (
-            <RelatedProduct item={product} key={i} selected={this.state.selected}/>
+            <RelatedProduct changeCurrentProduct={this.props.changeCurrentProduct} item={product} key={i} selected={this.state.selected}/>
           )
           })
         }

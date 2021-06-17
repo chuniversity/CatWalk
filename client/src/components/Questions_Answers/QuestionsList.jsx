@@ -132,8 +132,10 @@ export default class QuestionsList extends React.Component {
               {`Q: ${question.question_body}`}
             </span>
             <br></br>
-            <span style={{'fontStyle': 'italic'}}>
-              <button onClick={this.voteHelpful} value={question.question_id}>{`Helpful? Yes (${question.question_helpfulness})`}</button><button onClick={this.reportQuestion} value={question.question_id}>Report</button><AnswerForm/>
+            <span>
+              <button onClick={this.voteHelpful} value={question.question_id}>Helpful? Yes ({question.question_helpfulness})</button>
+              <button onClick={this.reportQuestion} value={question.question_id}>Report</button>
+              <AnswerForm/>
             </span>
             <AnswersList question={question}/>
           </ul>

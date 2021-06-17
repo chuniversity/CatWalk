@@ -10,8 +10,15 @@ export default class App extends React.Component {
   constructor () {
     super()
     this.state = {
-      currentProductId: 24156,
+      currentProduct: { id: 27189 },
     }
+  }
+
+  changeCurrentProduct (newId) {
+    const newProductId = { id: newId };
+    this.setState(
+      this.state.currentProduct = newProductId
+    )
   }
 
   render () {
@@ -22,16 +29,16 @@ export default class App extends React.Component {
           <Typography variant="h5" >Project Catwalk</Typography>
         </AppBar>
         <div id="Product Overview">
-          <Product_Overview productId={this.state.currentProductId} />
+          <Product_Overview productId={this.state.currentProduct.id} />
         </div>
         <div id="Ratings and Reviews">
-          <Ratings_Reviews productId={this.state.currentProductId} />
+          <Ratings_Reviews productId={this.state.currentProduct.id} />
         </div>
         <div id="Questions and Answers">
-          <Questions_Answers productId={this.state.currentProductId} />
+          <Questions_Answers productId={this.state.currentProduct.id} />
         </div>
         <div id="Related Items and Comparison">
-          <RelatedItems_Comparison productId={this.state.currentProductId} />
+          <RelatedItems_Comparison productId={this.state.currentProduct.id} changeCurrentProduct={this.changeCurrentProduct.bind(this)}/>
         </div>
       </>
     )

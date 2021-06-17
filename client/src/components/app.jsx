@@ -14,6 +14,13 @@ export default class App extends React.Component {
     }
   }
 
+  changeCurrentProduct (newId) {
+    this.setState( {
+      currentProductId: newId
+    }
+    )
+  }
+
   render () {
     return (
       <>
@@ -31,7 +38,7 @@ export default class App extends React.Component {
           <Questions_Answers productId={this.state.currentProductId} />
         </div>
         <div id="Related Items and Comparison">
-          <RelatedItems_Comparison productId={this.state.currentProductId} />
+          <RelatedItems_Comparison productId={this.state.currentProductId} changeCurrentProduct={this.changeCurrentProduct.bind(this)}/>
         </div>
       </>
     )

@@ -4,6 +4,10 @@ import Outfit from './Outfit.jsx';
 
 export default class App extends React.Component {
   constructor (props) {
+<<<<<<< HEAD
+=======
+    // console.log(props.productId)
+>>>>>>> 36e1b7739ef5bf5954635929bc60d17bb8f307e7
     super(props)
     this.state = {
     }

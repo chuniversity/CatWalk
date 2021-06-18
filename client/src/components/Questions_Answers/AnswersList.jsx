@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import access from '../../../../config.js';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 
 export default class AnswersList extends React.Component {
   isMounted = false;
@@ -87,15 +87,15 @@ export default class AnswersList extends React.Component {
         if (j < this.state.quantity) {
           return (
           <ul key={`answer_${answerId}`}>
-            <span style={{'fontSize': '15', 'fontWeight': 'bold'}}>
+            <Typography variant="h4">
               {`A: ${answer.body}`}
-            </span>
+            </Typography>
             <br></br>
-            <span style={{'fontStyle': 'italic'}}>
+            <Typography variant="caption">
               {`by ${answer.answerer_name}, ${(new Date(answer.date).toDateString()).slice(3)}  `}
               <Button onClick={this.voteHelpful} value={answerId} size="small" color="primary">Helpful? Yes ({answer.helpfulness})</Button>
               <Button onClick={this.reportAnswer} value={answerId} size="small" color="secondary">Report</Button>
-            </span>
+            </Typography>
             <br></br>
             <span>
               {answer.photos.map((photo, k) => {

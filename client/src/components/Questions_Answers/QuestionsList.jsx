@@ -178,15 +178,10 @@ export default class QuestionsList extends React.Component {
           </ul>
           )
         }
-        if (i === this.state.quantity) {
-          //render a button to show more questions once the limit is reached for quantity of questions to show in list
-          return (<div key={`questionListEndButtons_${question.question_id}`}>
-          <Button onClick={this.moreQuestions} variant="outlined" size="small">Show more answered questions</Button>
-          <Button onClick={this.collapseQuestions} variant="outlined" size="small">Show less questions</Button>
-          <Button onClick={this.hideAllQuestions} variant="outlined" size="small">Hide all questions</Button>
-          </div>)
-        }
       })}
+      <Button onClick={this.moreQuestions} variant="outlined" size="small">Show more answered questions</Button>
+      <Button onClick={this.collapseQuestions} variant="outlined" size="small">Show less questions</Button>
+      <Button onClick={this.hideAllQuestions} variant="outlined" size="small">Hide all questions</Button>
     </div>)
   }
 }

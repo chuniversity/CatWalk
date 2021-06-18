@@ -86,12 +86,11 @@ const AnswerForm = (props) => {
     };
     
     axios(config)
-      .then(function (response) {
-        ReactDOM.findDOMNode('addAnswerForm').reset()
+      .then((response) => {
+        //logic for resetting form inputs here
+        // ReactDOM.findDOMNode('addAnswerForm').reset()
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+      .catch(error => console.log(error));
   }
     
   

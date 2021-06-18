@@ -3,7 +3,7 @@ import axios from 'axios';
 import access from '../../../../config.js';
 import AnswersList from './AnswersList.jsx';
 import AnswerForm from './AnswerForm.jsx';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 import SearchBar from 'material-ui-search-bar';
 
 export default class QuestionsList extends React.Component {
@@ -160,9 +160,9 @@ export default class QuestionsList extends React.Component {
           if (i < this.state.quantity) {
             return (
             <ul key={`question_${question.question_id}`}>
-              <span style={{'fontWeight': 'bold', 'fontSize': '16'}}>
+              <Typography variant="h3">
                 {`Q: ${question.question_body}`}
-              </span>
+              </Typography>
               <br></br>
               <span>
                 <Button onClick={this.voteHelpful} value={question.question_id} size="small" color="primary">Helpful? Yes ({question.question_helpfulness})</Button>

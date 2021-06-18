@@ -1,25 +1,16 @@
+/* Still to do / optional to do:
+DONE: modal/form submission handling -> (gather user inputs upon submission and pass into an axios POST request, then refresh list after POST finishes)
+refresh "helpfulness Yes (2)" button when clicked/voted on a question or answer that the user found helpful
+remove question or answer when its reported (refresh questions list)
+DONE: fix the "show less questions" and "hide questions" coding logic so they don't dissapear when questions list rendered reach max limit of questions available
+max height of questions and answer list (maybe make list scrollable and set a max height of entire component)
+sorting answers rendered under each question by the answer's helpfulness 
+*/
 import React from 'react';
 import axios from 'axios';
 import access from '../../../../config.js';
 import QuestionForm from './QuestionForm.jsx';
 import QuestionsList from './QuestionsList.jsx';
-
-/*
-Title - Questions & Answers
-Search bar - searches through questions and answers for string input matches
-Question container/component section
-  Needs to show first/top question that will prioritize the top/first question shown in the following order
-    1. question/answer with highest relevancy based on search term
-    2. Then sorted by most helpful
-    3. Bonus idea would be drop down filter for sorting criteria based on relevancy, newest, or most helpful
-  Question "Q: ..." Helpful? Yes (25) | Add Answer
-  Answer Segments "A: ..."
-    Answer tag at time of answering: "by user1234, January 1, 2019 | Helpful? Yes (2) | Report"
-    Potential photos: "as you can see in these photos: [photos previously uploaded displayed here]"
-    Button for "load more answers"
-Button for "more answered questions"
-Button for "Add a question +"
-*/
 
 export default class Questions_Answers extends React.Component {
   isMounted = false;
@@ -28,7 +19,7 @@ export default class Questions_Answers extends React.Component {
     this.state = {
       questions: [],
       answers: [],
-      questionId: 0
+      questionId: 0,
     }
     this.getQuestions = this.getQuestions.bind(this);
   }
@@ -38,6 +29,9 @@ export default class Questions_Answers extends React.Component {
       .get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/?product_id=${this.props.productId}`, {
         headers: {
           'Authorization': access.token
+        },
+        params: {
+          'count': 10000
         }
       })
       .then(questions => {
@@ -63,10 +57,10 @@ export default class Questions_Answers extends React.Component {
     return (
       <>
         <h2>Questions and Answers</h2>
-        <QuestionsList questions={questions} />
-        <QuestionForm />
+        <QuestionsList questions={questions} productName={this.props.productName}/>
+        {/* Need to pass in current product name to question form as props to be used within the modal form pop up for adding a  question */}
+        <QuestionForm productId={this.props.productId} productName={this.props.productName}/>
       </>
     )
   }
 }
-

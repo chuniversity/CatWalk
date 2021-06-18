@@ -1,5 +1,8 @@
-import React from 'react';
-import { FormControl, Button, Modal, makeStyles, TextField } from '@material-ui/core';
+import React,{useState} from 'react';
+import ReactDOM from 'react-dom';
+import axios from 'axios';
+import { FormControl, Button, Modal, makeStyles, TextField, Typography } from '@material-ui/core';
+import access from '../../../../config.js';
 
 
 //set default position of modal pop up to be middle of screen
@@ -14,22 +17,29 @@ const getModalStyle = () => {
   };
 }
 
-//styling for modal pop up
+// styling for modal pop up
 const useStyles = makeStyles(theme => ({
   paper: {
     position: "absolute",
-    width: 300,
+    width: 480,
     backgroundColor: "white",
-    padding: 20
+    padding: 20,
   }
 }));
 
-
-const QuestionForm = () => {
+//props.productId 
+const QuestionForm = (props) => {
+  //styling for modal pop ups
   const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
-  const [open, setOpen] = React.useState(false);
+  const [modalStyle] = useState(getModalStyle);
+  const [open, setOpen] = useState(false);
   
+  //set up form input props to be received using react hooks
+  const [qBody, setqBody] = useState('');
+  const [qName, setqName] = useState('');
+  const [qEmail, setqEmail] = useState('');
+
+  //opening and closing modal logic
   const handleOpen = () => {
     setOpen(true);
   };
@@ -38,55 +48,107 @@ const QuestionForm = () => {
     setOpen(false);
   };
   
+  //form input handlers below
+  const handleBodyChange = (e) => {
+    if (e.target.value.length === 61) {
+      alert('60 character maximum for question please')
+    } else {
+      setqBody(e.target.value)
+    }
+  }
+  
+  // POST Request to add question to API
+  const addQuestion = (e) => {
+    e.preventDefault();
+    let data = {
+      "body": `${qBody}`,
+      "name": `${qName}`,
+      "email": `${qEmail}`,
+      "product_id": props.productId
+    };
+
+    let config = {
+      method: 'post',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions',
+      headers: { 
+        'authorization': access.token
+      },
+      data : data
+    };
+
+    axios(config)
+      .then(function (response) {
+        ReactDOM.findDOMNode('addQuestionForm').reset()
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+  
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2>Ask Your Question</h2>
-      <h4>{`About: ${'[currentProductNameHere]'}`}</h4>
-      <FormControl action="someURL" method="post" >
+      <h4>{`About: ${props.poductName}`}</h4>
+    <form id="addQuestionForm" onSubmit={addQuestion}>
         
-        <TextField
-          id="filled-multiline-static"
+        <input
+          id="outlined-question"
           label="Your Question"
-          multiline
           required
-          rows={4}
           variant="outlined"
-          inputProps={{maxLength: 60}}
-          onChange={ input => {
-            if (input.target.value.length === 60) {
-              alert('maximum question character limit of 60 reached!')
-            }
-          }}
           placeholder="60 character maximum"
+          value={qBody}
+          onChange={handleBodyChange}
+          style={{'width': 'auto', 'height': '100px'}}
         />
         <br></br>
-        <TextField
+        <br></br>
+        <input
         id="outlined-nickname"
         label="Your Nickname"
         variant="outlined"
         required
         placeholder="Example: jack543!"
+        value={qName}
+        onChange={e => setqName(e.target.value)}
         />
         <br></br>
-        <TextField
+        <Typography variant="caption">
+          “For privacy reasons, do not use your full name or email address” 
+        </Typography>
+
+        <br></br>
+        <br></br>
+        <input
         id="outlined-email"
         label="Your Email"
         variant="outlined"
         type="email"
         required
         placeholder="Example: jack@email.com"
+        value={qEmail}
+        onChange={e => setqEmail(e.target.value)}
         />
         <br></br>
-        <button type="submit">Submit Question</button>
-      </FormControl>
+        <Typography variant="caption">
+          "For authentication reasons, you will not be emailed"
+        </Typography>
+
+        <br></br>
+        <br></br>
+        
+        
+        
+        <button type="submit" variant="outlined" style={{'backgroundColor': '#d5d2d2'}}>Submit Question</button>
+      </form>
     </div>
   );
   
   return (
     <>
-      <button onClick={handleOpen}>
-        Ask question
-      </button>
+      <Button onClick={handleOpen} variant="outlined">
+        Ask question +
+      </Button>
       <Modal open={open} onClose={handleClose}>
         {body}
       </Modal>

@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import access from '../../../../config.js';
+import { Button } from '@material-ui/core';
 
 export default class AnswersList extends React.Component {
   isMounted = false;
@@ -24,7 +25,7 @@ export default class AnswersList extends React.Component {
 
   voteHelpful(e) {
     if(!this.state.voted && this.isMounted) {
-      let answerId = e.target.value;
+      let answerId = e.currentTarget.value;
       let config = {
         method: 'put',
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/answers/${answerId}/helpful`,
@@ -47,7 +48,7 @@ export default class AnswersList extends React.Component {
 
   reportAnswer(e) {
     if(!this.state.reported && this.isMounted) {
-      let answerId = e.target.value;
+      let answerId = e.currentTarget.value;
       let config = {
         method: 'put',
         url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/answers/${answerId}/report`,
@@ -78,21 +79,22 @@ export default class AnswersList extends React.Component {
 
   render() {
     const {question} = this.props;
-    return (<>
+    return (<div key={`answerList_${question.question_id}`}>
       {Object.entries(question.answers).map((answerTuple, j) => {
+        //.sort((a, b) => a[1].helpfulness < b[1].helpfulness)
         let answerId = answerTuple[0];
         let answer = answerTuple[1];
         if (j < this.state.quantity) {
           return (
-          <ul key={answerId}>
-            <span>
+          <ul key={`answer_${answerId}`}>
+            <span style={{'fontSize': '15', 'fontWeight': 'bold'}}>
               {`A: ${answer.body}`}
             </span>
             <br></br>
             <span style={{'fontStyle': 'italic'}}>
               {`by ${answer.answerer_name}, ${(new Date(answer.date).toDateString()).slice(3)}  `}
-              <button onClick={this.voteHelpful} value={answerId}>Helpful? Yes ({answer.helpfulness})</button>
-              <button onClick={this.reportAnswer} value={answerId}>Report</button>
+              <Button onClick={this.voteHelpful} value={answerId} size="small" color="primary">Helpful? Yes ({answer.helpfulness})</Button>
+              <Button onClick={this.reportAnswer} value={answerId} size="small" color="secondary">Report</Button>
             </span>
             <br></br>
             <span>
@@ -112,10 +114,10 @@ export default class AnswersList extends React.Component {
             </span>
           </ul>
           )
-        } else if (j === this.state.quantity + 1) {
-          return (<button key={`loadAnswers_${j}`} onClick={this.moreAnswers}>Load more answers</button>)
+        } else if (j === this.state.quantity) {
+          return (<Button key={`loadAnswers_${answerId}_${j}`} onClick={this.moreAnswers} variant="outlined" style={{'border': '1px'}}>Show more answers</Button>)
         }
       })}
-    </>)
+    </div>)
   }
 }

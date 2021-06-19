@@ -3,6 +3,8 @@ import axios from 'axios';
 import access from '../../../../config.js';
 import AnswersList from './AnswersList.jsx';
 import AnswerForm from './AnswerForm.jsx';
+import { Button, Typography, Card, Container } from '@material-ui/core';
+import SearchBar from 'material-ui-search-bar';
 
 export default class QuestionsList extends React.Component {
   isMounted = false;
@@ -10,20 +12,117 @@ export default class QuestionsList extends React.Component {
     super(props);
     this.state = {
       quantity: 4,
-      filtered: []
+      filtered: [],
+      voted: false,
+      reported: false,
     }
     this.moreQuestions = this.moreQuestions.bind(this);
+    this.collapseQuestions = this.collapseQuestions.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.voteHelpful = this.voteHelpful.bind(this);
     this.reportQuestion = this.reportQuestion.bind(this);
   }
 
   moreQuestions () {
-    this.setState({
-      quantity: this.state.quantity + 2
-    })
+    if(this.state.quantity + 1 === this.props.questions.length) {
+      this.setState({
+        quantity: this.state.quantity + 1
+      })
+    } else if (this.state.quantity + 2 > this.props.questions.length) {
+      return;
+    } else {
+      this.setState({
+        quantity: this.state.quantity + 2
+      })
+    }
+  }
+  
+  collapseQuestions() {
+    if (this.state.quantity > 4) {
+      this.setState({
+        quantity: this.state.quantity - 2
+      })
+    }
   }
 
+  
+  //appending the questions list rendered to screen based on searchbar input
+  //once the input term reaches 3 characters of length it will filter down questions to only include questions with search term
+  //if the input drops below 3 characters then the questions list will return back to normal
+  handleChange(searchInput) {
+    let currentQuestions = this.props.questions;
+    let filteredQuestions = [];
+    if (searchInput.length > 2) {
+      //if the user collapses all questions (hides question list) but then tries to search through questions
+      //this if-conditional will reset the question quantity back to default first so questions will display automatically when searching
+      if (this.state.quantity === 0) {
+        this.setState({
+          quantity: 4
+        })
+      }
+      filteredQuestions = currentQuestions.filter(question => {
+        const lcQuestion = question.question_body.toLowerCase();
+        const SearchTerm = searchInput.toLowerCase();
+        return lcQuestion.includes(SearchTerm);
+      })
+      this.setState({
+        filtered: filteredQuestions
+      })
+    } else {
+      this.setState({
+        filtered: currentQuestions
+      })
+    }
+  }
+  
+  voteHelpful(e) {
+    if(!this.state.voted && this.isMounted) {
+      // send put request to increase helpfulness for a specific answer
+      let questionId = e.currentTarget.value;
+      let config = {
+        method: 'put',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/${questionId}/helpful`,
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': access.token
+        }
+      };
+      axios(config)
+        .then(() => {
+          if (this.isMounted) {
+            this.setState({
+              voted: true
+            })
+          }
+        })
+        .catch(err => console.error(err))
+    }
+  }
+  
+  reportQuestion(e) {
+    if(!this.state.reported && this.isMounted) {
+      let questionId = e.target.value;
+      // send put request to report a specific answer
+      let config = {
+        method: 'put',
+        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/${questionId}/report`,
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': access.token
+        }
+      };
+      axios(config)
+      .then(() => {
+        if (this.isMounted) {
+            this.setState({
+              reported: true
+            })
+          }
+        })
+        .catch(err => console.error(err))
+    }
+  }
+  
   componentDidMount() {
     this.isMounted = true;
     if (this.isMounted) {
@@ -44,107 +143,44 @@ export default class QuestionsList extends React.Component {
     });
   }
 
-  //appending the questions list rendered to screen based on searchbar input
-  //once the input term reaches 3 characters of length it will filter down questions to only include questions with search term
-  //if the input drops below 3 characters then the questions list will return back to normal
-  handleChange(e) {
-    let currentQuestions = this.props.questions;
-    let filteredQuestions = [];
-    if (e.target.value.length > 2) {
-      filteredQuestions = currentQuestions.filter(question => {
-        const lcQuestion = question.question_body.toLowerCase();
-        const SearchTerm = e.target.value.toLowerCase();
-        return lcQuestion.includes(SearchTerm);
-      })
-      this.setState({
-        filtered: filteredQuestions
-      })
-    } else {
-      this.setState({
-        filtered: currentQuestions
-      })
-    }
-  }
-
-  voteHelpful(e) {
-    if(!this.state.voted && this.isMounted) {
-      let questionId = e.target.value;
-      // send put request to increase helpfulness for a specific answer
-      let config = {
-        method: 'put',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/${questionId}/helpful`,
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': access.token
-        }
-      };
-      axios(config)
-        .then(() => {
-          if (this.isMounted) {
-            this.setState({
-              voted: true
-            })
-          }
-        })
-        .catch(err => console.error(err))
-    }
-  }
-
-  reportQuestion(e) {
-    if(!this.state.reported && this.isMounted) {
-      let questionId = e.target.value;
-      // send put request to report a specific answer
-      let config = {
-        method: 'put',
-        url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions/${questionId}/report`,
-        headers: {
-          'Content-Type': 'application/json',
-          'authorization': access.token
-        }
-      };
-      axios(config)
-        .then(() => {
-          if (this.isMounted) {
-            this.setState({
-              reported: true
-            })
-          }
-        })
-        .catch(err => console.error(err))
-    }
-  }
-
   render() {
-    const {questions} = this.props;
-    return (<>
-      <input
-        type="text"
-        placeholder="Search questions..."
-        onChange={this.handleChange}
+    const {questions, productName} = this.props;
+    return (<Container>
+      <br></br>
+      <SearchBar
+      style={{'width': 'auto'}}
+      type='text'
+      placeholder={`Have a question? Search (${questions.length}) questions asked...`}
+      onChange={this.handleChange}
       />
-      {this.state.filtered.sort((a, b) => a.question_helpfulness < b.question_helpfulness).map((question, i) => {
-        //after filtering questions by search term (optionally) and then by helpfulness ratings
-        //render only questions that will stay under the current quantity cap that can only be increased when a user clicks "show more"
-        if (i < this.state.quantity) {
-          return (
-          <ul key={question.question_id}>
-            <span style={{'fontWeight': 'bold'}}>
-              {`Q: ${question.question_body}`}
-            </span>
-            <br></br>
-            <span>
-              <button onClick={this.voteHelpful} value={question.question_id}>Helpful? Yes ({question.question_helpfulness})</button>
-              <button onClick={this.reportQuestion} value={question.question_id}>Report</button>
-              <AnswerForm/>
-            </span>
-            <AnswersList question={question}/>
-          </ul>
-          )
-        } else if (i === this.state.quantity) {
-          //render a button to show more questions once the limit is reached for quantity of questions to show in list
-          return (<button key={`loadQuestions_${question.question_id}`} onClick={this.moreQuestions}>Load more answered questions</button>)
-        }
-      })}
-    </>)
+      <br></br>
+      <Container id='questionsList' style={{'overflow': 'auto', 'height': '60%', 'width': 'auto'}}>
+        <br></br>
+        {this.state.filtered.sort((a, b) => a.question_helpfulness < b.question_helpfulness).map((question, i) => {
+          //after filtering questions by search term (optionally) and then by helpfulness ratings
+          //render only questions that will stay under the current quantity cap that can only be increased when a user clicks "show more"
+          if (i < this.state.quantity) {
+            return (<div key={`question_${question.question_id}`}>
+              <br></br>
+              <Container>
+                <Typography variant="h6">
+                  {`Q: ${question.question_body}`}
+                  <br></br>
+                  <Button onClick={this.voteHelpful} value={question.question_id} size="small" color="primary">Helpful? Yes ({question.question_helpfulness})</Button>
+                  <Button onClick={this.reportQuestion} value={question.question_id} size="small" color="secondary">Report</Button>
+                  <AnswerForm questionBody={question.question_body} questionId={question.question_id} productName={productName}/>
+                </Typography>
+                <AnswersList question={question} />
+                <br></br>
+              </Container>
+            </div>)
+          }
+        })} 
+        <br></br> 
+      </Container>
+      <Button onClick={this.moreQuestions} variant="outlined" size="small">Show more answered questions</Button>
+      <Button onClick={this.collapseQuestions} variant="outlined" size="small">Show less questions</Button>
+      <br></br>
+    </Container>)
   }
 }

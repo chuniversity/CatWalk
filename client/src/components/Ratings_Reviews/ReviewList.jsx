@@ -1,17 +1,15 @@
 import React from 'react';
 import ReviewTile from './ReviewTile.jsx';
 
-
-
 const ReviewList = ({reviewResults}) => {
-  console.log()
+  
   return (
     <>
     <div>
-    
      {reviewResults.map((item) => (
        <ReviewTile 
           key={item.review_id}
+          review_id={item.review_id}
           rating={item.rating}
           summary={item.summary}
           recommend={item.recommend}
@@ -24,7 +22,6 @@ const ReviewList = ({reviewResults}) => {
        />
     ))}
     </div>
-
     </>
   )
 };

@@ -44,70 +44,61 @@ class Overview extends React.Component {
   }
 
   componentDidMount () {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}`, {
-        headers: {
-          'Authorization': access.token
-        }
-    }).then(data => {
-      const newProduct = data.data;
+    const newProduct = this.props.showProduct;
       this.setState(
         this.state.product = newProduct
       );
-      return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`, {
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`, {
+          headers: {
+            'Authorization': access.token
+          }
+      }).then( data => {
+        const newStyles = data.data.results;
+        let newCurrentStyle = {};
+        this.setState(
+          this.state.styles = newStyles
+        );
+        newStyles.map(item => {
+          if (item['default?']) {
+            newCurrentStyle = item;
+          }
+        });
+        this.setState(
+          this.state.currentStyle = newCurrentStyle
+        );
+        let newAllSizes = [];
+        const currentSkus = this.state.currentStyle.skus;
+        for (let key in currentSkus) {
+          newAllSizes.push(currentSkus[key].size);
+        }
+        this.setState(
+          this.state.allSizes = newAllSizes
+        )
+      }).catch(err => {
+        console.error(err);
+      });
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/reviews/meta?product_id=${this.props.productId}`,
+      {
         headers: {
           'Authorization': access.token
         }
-      })
-    }).then( data => {
-      const newStyles = data.data.results;
-      let newCurrentStyle = {};
-      this.setState(
-        this.state.styles = newStyles
-      );
-      newStyles.map(item => {
-        if (item['default?']) {
-          newCurrentStyle = item;
+      }).then((results) => {
+        let ratings = results.data.ratings;
+        var responseTotal = 0;
+        let scoreTotal = 0;
+        for (let key in ratings) {
+          let temp = ratings[key];
+          responseTotal = responseTotal + Number(temp);
+          scoreTotal += key * temp;
         }
+        let result = scoreTotal / responseTotal;
+        const newRating = { average: result};
+        this.setState(
+          this.state.rating = newRating
+        )})
+        .catch((err) =>{
+            console.error("error @overview review get:" , err);
       });
-      this.setState(
-        this.state.currentStyle = newCurrentStyle
-      );
-      let newAllSizes = [];
-      const currentSkus = this.state.currentStyle.skus;
-      for (let key in currentSkus) {
-        newAllSizes.push(currentSkus[key].size);
-      }
-      this.setState(
-        this.state.allSizes = newAllSizes
-      )
-    }).catch(err => {
-      console.error(err);
-    });
-    /**********************************
-     *        Star Reviews
-     **********************************/
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/reviews/meta?product_id=${this.props.productId}`,
-    {
-      headers: {
-        'Authorization': access.token
-      }
-    }).then((results) => {
-      let ratings = results.data.ratings;
-      var responseTotal = 0;
-      let scoreTotal = 0;
-      for (let key in ratings) {
-        let temp = ratings[key];
-        responseTotal = responseTotal + Number(temp);
-        scoreTotal += key * temp;
-      }
-      let result = scoreTotal / responseTotal;
-      const newRating = { average: result};
-      this.setState(
-        this.state.rating = newRating
-      )})
-      .catch((err) =>{
-          console.error("error @ review get:" , err);
-    });
   }
 
   changeStyle (newStyleId) {
@@ -167,21 +158,15 @@ class Overview extends React.Component {
   }
 
   changeOnProductId () {
-    if (this.props.productId !== this.state.product.id && this.state.product.id !== undefined) {
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}`, {
-        headers: {
-          'Authorization': access.token
-        }
-      }).then(data => {
-        const newProduct = data.data;
-        this.setState(
-          this.state.product = newProduct
-        );
-        return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`, {
+    if (this.props.showProduct.id !== this.state.product.id && this.state.product.id !== undefined) {
+      const newProduct = this.props.showProduct;
+      this.setState(
+        this.state.product = newProduct
+      );
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`, {
           headers: {
             'Authorization': access.token
           }
-        })
       }).then( data => {
         const newStyles = data.data.results;
         let newCurrentStyle = {};
@@ -227,7 +212,7 @@ class Overview extends React.Component {
           this.state.rating = newRating
         )})
         .catch((err) =>{
-            console.error("error @ review get:" , err);
+            console.error("error @ overview review get:" , err);
       });
     }
   }

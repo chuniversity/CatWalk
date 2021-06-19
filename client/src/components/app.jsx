@@ -10,8 +10,13 @@ export default class App extends React.Component {
   constructor () {
     super()
     this.state = {
+<<<<<<< HEAD
+      outfit: [],
+      currentProduct: { id: 27189 }
+=======
       outfit: [27189,  27190],
       currentProduct: { id: 27189 },
+>>>>>>> e09d4727c71e70bd56a7ce1456478d797e4c1476
     }
   }
 
@@ -20,6 +25,25 @@ export default class App extends React.Component {
     this.setState(
       this.state.currentProduct = newProductId
     )
+  }
+
+  addToOutfit (productId) {
+    let temp = this.state.outfit;
+    temp.push(productId)
+    this.setState(
+      this.state.outfit = temp
+    )
+  }
+
+  removeFromOutfit (productId) {
+    let temp = this.state.outfit;
+    let i = temp.indexOf(productId);
+    console.log('temp:', temp)
+    temp.splice(i, 1);
+    this.setState(
+      this.state.outfit = temp
+      )
+      console.log('slice:', this.state.outfit)
   }
 
   render () {
@@ -41,6 +65,8 @@ export default class App extends React.Component {
         <div id="Related Items and Comparison">
           <RelatedItems_Comparison
             productId={this.state.currentProduct.id}
+            removeFromOutfit={this.removeFromOutfit.bind(this)}
+            addToOutfit={this.addToOutfit.bind(this)}
             changeCurrentProduct={this.changeCurrentProduct.bind(this)}
             outfit={this.state.outfit}
           />

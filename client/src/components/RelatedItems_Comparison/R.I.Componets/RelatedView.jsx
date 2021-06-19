@@ -5,6 +5,12 @@ import axios from 'axios';
 import Carousel from 'react-elastic-carousel';
 import access from '../../../../../config.js';
 
+{/* <RelatedView
+addToOutfit={this.props.addToOutfit}
+currentItem={this.state.selected}
+changeCurrentProduct={this.props.changeCurrentProduct}
+defaultStyle={this.state.defProductStyle}
+related={this.state.relatedArray} /> */}
 
 const RelatedView = (props) => {
   return (
@@ -16,6 +22,7 @@ const RelatedView = (props) => {
       {props.related.map((product, i) => {
         return (
           <RelatedProduct
+          addToOutfit={props.addToOutfit}
           changeCurrentProduct={props.changeCurrentProduct}
           item={product}
           key={i}

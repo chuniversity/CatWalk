@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize, currentSize, allSizes, currentQuantity, changeQuantity, arrQty }) => {
+const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize, currentSize, allSizes, currentQuantity, changeQuantity, arrQty, galleryIndex, ratingAverage }) => {
 
   const classes = useStyles();
 
   const shareUrl = 'https://github.com/thefozzies/FEC';
   const shareTitle = `I am loving the ${product.name} from {the company name}`;
-  let mediaImg = currentStyle.photos === undefined ? 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80':currentStyle.photos[0].url ;
+  let mediaImg = currentStyle.photos === undefined ? 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80':currentStyle.photos[galleryIndex].url ;
 
   const disableFunc = () => {
     const notSizes = ['', 'Select Size'];
@@ -40,7 +40,7 @@ const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize,
     <div className={classes.root}>
       <Grid container spacing={1} justify='center'>
         <Grid item xs={11}>
-          <Ratings ratingAverage={3.25}/>
+          <Ratings ratingAverage={ratingAverage}/>
         </Grid>
         <Grid item xs={11}>
           <Typography variant='h5'>{product.category}</Typography>

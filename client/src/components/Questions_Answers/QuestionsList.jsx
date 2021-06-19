@@ -3,7 +3,7 @@ import axios from 'axios';
 import access from '../../../../config.js';
 import AnswersList from './AnswersList.jsx';
 import AnswerForm from './AnswerForm.jsx';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography, Card, Container } from '@material-ui/core';
 import SearchBar from 'material-ui-search-bar';
 
 export default class QuestionsList extends React.Component {
@@ -145,38 +145,42 @@ export default class QuestionsList extends React.Component {
 
   render() {
     const {questions, productName} = this.props;
-    return (<>
+    return (<Container>
+      <br></br>
       <SearchBar
       style={{'width': 'auto'}}
       type='text'
       placeholder={`Have a question? Search (${questions.length}) questions asked...`}
       onChange={this.handleChange}
       />
-      
-      <div id='questionsList' style={{'overflow': 'auto', 'height': '50%', 'width': 'auto'}}>
+      <br></br>
+      <Container id='questionsList' style={{'overflow': 'auto', 'height': '60%', 'width': 'auto'}}>
+        <br></br>
         {this.state.filtered.sort((a, b) => a.question_helpfulness < b.question_helpfulness).map((question, i) => {
           //after filtering questions by search term (optionally) and then by helpfulness ratings
           //render only questions that will stay under the current quantity cap that can only be increased when a user clicks "show more"
           if (i < this.state.quantity) {
-            return (
-            <ul key={`question_${question.question_id}`}>
-              <Typography variant="h3">
-                {`Q: ${question.question_body}`}
-              </Typography>
+            return (<div key={`question_${question.question_id}`}>
               <br></br>
-              <span>
-                <Button onClick={this.voteHelpful} value={question.question_id} size="small" color="primary">Helpful? Yes ({question.question_helpfulness})</Button>
-                <Button onClick={this.reportQuestion} value={question.question_id} size="small" color="secondary">Report</Button>
-                <AnswerForm questionBody={question.question_body} questionId={question.question_id} productName={productName}/>
-              </span>
-              <AnswersList question={question} />
-            </ul>
-            )
+              <Container>
+                <Typography variant="h6">
+                  {`Q: ${question.question_body}`}
+                  <br></br>
+                  <Button onClick={this.voteHelpful} value={question.question_id} size="small" color="primary">Helpful? Yes ({question.question_helpfulness})</Button>
+                  <Button onClick={this.reportQuestion} value={question.question_id} size="small" color="secondary">Report</Button>
+                  <AnswerForm questionBody={question.question_body} questionId={question.question_id} productName={productName}/>
+                </Typography>
+                <AnswersList question={question} />
+                <br></br>
+              </Container>
+            </div>)
           }
-        })}  
-      </div>
+        })} 
+        <br></br> 
+      </Container>
       <Button onClick={this.moreQuestions} variant="outlined" size="small">Show more answered questions</Button>
       <Button onClick={this.collapseQuestions} variant="outlined" size="small">Show less questions</Button>
-    </>)
+      <br></br>
+    </Container>)
   }
 }

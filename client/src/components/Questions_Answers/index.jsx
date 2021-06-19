@@ -5,14 +5,14 @@ remove question or answer when its reported (refresh questions list)
 DONE: fix the "show less questions" and "hide questions" coding logic so they don't dissapear when questions list rendered reach max limit of questions available
 DONE: max height of questions and answer list (maybe make list scrollable and set a max height of entire component)
 sorting answers rendered under each question by the answer's helpfulness
-style Q&A to be more compatabile with rest of app
+DONE:style Q&A to be more compatabile with rest of app
 */
 import React from 'react';
 import axios from 'axios';
 import access from '../../../../config.js';
 import QuestionForm from './QuestionForm.jsx';
 import QuestionsList from './QuestionsList.jsx';
-import { Typography } from '@material-ui/core';
+import { Typography, Container } from '@material-ui/core';
 
 export default class Questions_Answers extends React.Component {
   isMounted = false;
@@ -57,12 +57,15 @@ export default class Questions_Answers extends React.Component {
   render() {
     const {questions, answers} = this.state;
     return (
-      <>
-        <Typography variant="h4">Questions and Answers</Typography>
+      <Container >
+        <br></br>
+        <Typography variant="h5">Questions and Answers</Typography>
         <QuestionsList questions={questions} productName={this.props.productName}/>
         {/* Need to pass in current product name to question form as props to be used within the modal form pop up for adding a  question */}
+        <br></br>
         <QuestionForm productId={this.props.productId} productName={this.props.productName}/>
-      </>
+        <br></br>
+      </Container>
     )
   }
 }

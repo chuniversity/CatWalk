@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import access from '../../../../config.js';
-import { Button, Typography } from '@material-ui/core';
+import { Button, Typography, Card } from '@material-ui/core';
 
 export default class AnswersList extends React.Component {
   isMounted = false;
@@ -85,19 +85,18 @@ export default class AnswersList extends React.Component {
         let answerId = answerTuple[0];
         let answer = answerTuple[1];
         if (j < this.state.quantity) {
-          return (
-          <ul key={`answer_${answerId}`}>
-            <Typography variant="h4">
-              {`A: ${answer.body}`}
-            </Typography>
-            <br></br>
-            <Typography variant="caption">
-              {`by ${answer.answerer_name}, ${(new Date(answer.date).toDateString()).slice(3)}  `}
-              <Button onClick={this.voteHelpful} value={answerId} size="small" color="primary">Helpful? Yes ({answer.helpfulness})</Button>
-              <Button onClick={this.reportAnswer} value={answerId} size="small" color="secondary">Report</Button>
-            </Typography>
-            <br></br>
-            <span>
+          return (<div key={`answer_${answerId}`}>
+            
+            <Card style={{'border': '1px'}}>
+              <Typography variant="subtitle1" style={{'marginLeft': '10px'}}>
+                {`A: ${answer.body}`}
+              </Typography>
+              <Typography variant="caption" style={{'marginLeft': '15px'}}>
+                {`by ${answer.answerer_name}, ${(new Date(answer.date).toDateString()).slice(3)}  `}
+                <Button onClick={this.voteHelpful} value={answerId} size="small" color="primary">Helpful? Yes ({answer.helpfulness})</Button>
+                <Button onClick={this.reportAnswer} value={answerId} size="small" color="secondary">Report</Button>
+              </Typography>
+              <br></br>
               {answer.photos.map((photo, k) => {
                 return <img
                 src={photo}
@@ -110,12 +109,12 @@ export default class AnswersList extends React.Component {
                 }}
                 />
               })}
+            </Card>
             <br></br>
-            </span>
-          </ul>
+          </div>
           )
         } else if (j === this.state.quantity) {
-          return (<Button key={`loadAnswers_${answerId}_${j}`} onClick={this.moreAnswers} variant="outlined" style={{'border': '1px'}}>Show more answers</Button>)
+          return (<Button key={`loadAnswers_${answerId}_${j}`} onClick={this.moreAnswers} variant="outlined" size="small" style={{'backgroundColor': '#e5e4e4'}}>Show more answers</Button>)
         }
       })}
     </div>)

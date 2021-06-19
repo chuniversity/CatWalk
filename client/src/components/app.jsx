@@ -3,8 +3,6 @@ import Product_Overview from './Product_Overview/index.jsx';
 import Ratings_Reviews from './Ratings_Reviews/index.jsx';
 import Questions_Answers from './Questions_Answers/index.jsx';
 import RelatedItems_Comparison from './RelatedItems_Comparison/index.jsx';
-import axios from 'axios';
-import access from '../../../config.js';
 
 import { CssBaseline, AppBar, Typography } from '@material-ui/core';
 
@@ -13,28 +11,8 @@ export default class App extends React.Component {
     super()
     this.state = {
       outfit: [],
-      currentProduct: { id: 27189 },
-      showProduct: {}
+      currentProduct: { id: 27189 }
     }
-  }
-
-  componentDidMount () {
-   this.changeShownProduct();
-  }
-
-  changeShownProduct () {
-    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.state.currentProduct.id}`, {
-      headers: {
-        'Authorization': access.token
-      }
-    }).then(data => {
-      const newProduct = data.data;
-      this.setState(
-        this.state.showProduct = newProduct
-      );
-    }).catch (err => {
-      console.error(err);
-    })
   }
 
   changeCurrentProduct (newId) {
@@ -42,7 +20,6 @@ export default class App extends React.Component {
     this.setState(
       this.state.currentProduct = newProductId
     )
-    this.changeShownProduct();
   }
 
   addToOutfit (productId) {
@@ -70,13 +47,13 @@ export default class App extends React.Component {
           <Typography variant="h5" >Project Catwalk</Typography>
         </AppBar>
         <div id="Product Overview">
-          <Product_Overview productId={this.state.currentProduct.id} showProduct={this.state.showProduct}/>
+          <Product_Overview productId={this.state.currentProduct.id} />
         </div>
         <div id="Ratings and Reviews">
           <Ratings_Reviews productId={this.state.currentProduct.id} />
         </div>
         <div id="Questions and Answers">
-          <Questions_Answers productId={this.state.currentProduct.id} productName={this.state.showProduct.name}/>
+          <Questions_Answers productId={this.state.currentProduct.id} />
         </div>
         <div id="Related Items and Comparison">
           <RelatedItems_Comparison

@@ -1,12 +1,3 @@
-/* Still to do / optional to do:
-DONE: modal/form submission handling -> (gather user inputs upon submission and pass into an axios POST request, then refresh list after POST finishes)
-refresh "helpfulness Yes (2)" button when clicked/voted on a question or answer that the user found helpful
-remove question or answer when its reported (refresh questions list)
-DONE: fix the "show less questions" and "hide questions" coding logic so they don't dissapear when questions list rendered reach max limit of questions available
-DONE: max height of questions and answer list (maybe make list scrollable and set a max height of entire component)
-sorting answers rendered under each question by the answer's helpfulness
-DONE:style Q&A to be more compatabile with rest of app
-*/
 import React from 'react';
 import axios from 'axios';
 import access from '../../../../config.js';

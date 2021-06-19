@@ -24,7 +24,13 @@ class Overview extends React.Component {
       currentQuantity: {
         quantity: 0
       },
-      arrQty: []
+      arrQty: [],
+      gallery: {
+        index: 0
+      },
+      rating: {
+        average: 0
+      }
     };
     this.classes = makeStyles((theme) => ({
       root: {
@@ -76,6 +82,31 @@ class Overview extends React.Component {
       )
     }).catch(err => {
       console.error(err);
+    });
+    /**********************************
+     *        Star Reviews
+     **********************************/
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/reviews/meta?product_id=${this.props.productId}`,
+    {
+      headers: {
+        'Authorization': access.token
+      }
+    }).then((results) => {
+      let ratings = results.data.ratings;
+      var responseTotal = 0;
+      let scoreTotal = 0;
+      for (let key in ratings) {
+        let temp = ratings[key];
+        responseTotal = responseTotal + Number(temp);
+        scoreTotal += key * temp;
+      }
+      let result = scoreTotal / responseTotal;
+      const newRating = { average: result};
+      this.setState(
+        this.state.rating = newRating
+      )})
+      .catch((err) =>{
+          console.error("error @ review get:" , err);
     });
   }
 
@@ -176,9 +207,39 @@ class Overview extends React.Component {
       }).catch(err => {
         console.error(err);
       });
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/reviews/meta?product_id=${this.props.productId}`,
+      {
+        headers: {
+          'Authorization': access.token
+        }
+      }).then((results) => {
+        let ratings = results.data.ratings;
+        var responseTotal = 0;
+        let scoreTotal = 0;
+        for (let key in ratings) {
+          let temp = ratings[key];
+          responseTotal = responseTotal + Number(temp);
+          scoreTotal += key * temp;
+        }
+        let result = scoreTotal / responseTotal;
+        const newRating = { average: result};
+        this.setState(
+          this.state.rating = newRating
+        )})
+        .catch((err) =>{
+            console.error("error @ review get:" , err);
+      });
     }
   }
 
+  changeGalleryIndex (id) {
+    const newGallery = {
+      index: id
+    }
+    this.setState(
+      this.state.gallery = newGallery
+    )
+  }
   render () {
     this.changeOnProductId();
     return (
@@ -186,10 +247,10 @@ class Overview extends React.Component {
         <Typography variant="body1">Product Overview</Typography>
         <Grid container spacing={1} justify='center'>
           <Grid item xs={7}>
-              <Gallery photos={this.state.currentStyle.photos}/>
+              <Gallery photos={this.state.currentStyle.photos} galleryIndex={this.state.gallery.index} changeGalleryIndex={this.changeGalleryIndex.bind(this)}/>
           </Grid>
           <Grid item xs={5} >
-            <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty}/>
+            <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty} galleryIndex={this.state.gallery.index} ratingAverage={this.state.rating.average}/>
           </Grid>
           <Grid item xs={12}>
             <Grid container spacing={10} alignItems='center' justify='center' className={this.classes.root}>

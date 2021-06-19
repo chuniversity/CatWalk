@@ -10,13 +10,8 @@ export default class App extends React.Component {
   constructor () {
     super()
     this.state = {
-<<<<<<< HEAD
       outfit: [],
       currentProduct: { id: 27189 }
-=======
-      outfit: [27189,  27190],
-      currentProduct: { id: 27189 },
->>>>>>> e09d4727c71e70bd56a7ce1456478d797e4c1476
     }
   }
 

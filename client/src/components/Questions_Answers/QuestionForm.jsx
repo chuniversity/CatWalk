@@ -9,7 +9,7 @@ import access from '../../../../config.js';
 const getModalStyle = () => {
   const top = 50;
   const left = 50;
-  
+
   return {
     top: `${top}%`,
     left: `${left}%`,
@@ -27,13 +27,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-//props.productId 
+//props.productId
 const QuestionForm = (props) => {
   //styling for modal pop ups
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  
+
   //set up form input props to be received using react hooks
   const [qBody, setqBody] = useState('');
   const [qName, setqName] = useState('');
@@ -43,11 +43,11 @@ const QuestionForm = (props) => {
   const handleOpen = () => {
     setOpen(true);
   };
-  
+
   const handleClose = () => {
     setOpen(false);
   };
-  
+
   //form input handlers below
   const handleBodyChange = (e) => {
     if (e.target.value.length === 61) {
@@ -56,7 +56,7 @@ const QuestionForm = (props) => {
       setqBody(e.target.value)
     }
   }
-  
+
   // POST Request to add question to API
   const addQuestion = (e) => {
     e.preventDefault();
@@ -70,7 +70,7 @@ const QuestionForm = (props) => {
     let config = {
       method: 'post',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/qa/questions',
-      headers: { 
+      headers: {
         'authorization': access.token
       },
       data : data
@@ -85,13 +85,13 @@ const QuestionForm = (props) => {
         console.log(error);
       });
   }
-  
+
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2>Ask Your Question</h2>
-      <h4>{`About: ${props.poductName}`}</h4>
+      <h4>{`About: ${props.productName}`}</h4>
     <form id="addQuestionForm" onSubmit={addQuestion}>
-        
+
         <input
           id="outlined-question"
           label="Your Question"
@@ -103,7 +103,7 @@ const QuestionForm = (props) => {
           style={{'width': 'auto', 'height': '100px'}}
         />
         <br></br>
-        
+
         <br></br>
         <input
         id="outlined-nickname"
@@ -116,10 +116,10 @@ const QuestionForm = (props) => {
         />
         <br></br>
         <Typography variant="caption">
-          “For privacy reasons, do not use your full name or email address” 
+          “For privacy reasons, do not use your full name or email address”
         </Typography>
         <br></br>
-        
+
         <br></br>
         <input
         id="outlined-email"
@@ -132,18 +132,18 @@ const QuestionForm = (props) => {
         onChange={e => setqEmail(e.target.value)}
         />
         <br></br>
-        
+
         <Typography variant="caption">
           "For authentication reasons, you will not be emailed"
         </Typography>
-        
+
         <br></br>
         <br></br>
         <button type="submit" variant="outlined" style={{'backgroundColor': '#d5d2d2'}}>Submit Question</button>
       </form>
     </div>
   );
-  
+
   return (
     <>
       <Button onClick={handleOpen} variant="outlined" style={{'backgroundColor': '#e5e4e8'}}>

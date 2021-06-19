@@ -32,7 +32,6 @@ export default class App extends React.Component {
       this.setState(
         this.state.showProduct = newProduct
       );
-      console.log(this.state.showProduct);
     }).catch (err => {
       console.error(err);
     })
@@ -57,12 +56,10 @@ export default class App extends React.Component {
   removeFromOutfit (productId) {
     let temp = this.state.outfit;
     let i = temp.indexOf(productId);
-    console.log('temp:', temp)
     temp.splice(i, 1);
     this.setState(
       this.state.outfit = temp
-      )
-      console.log('slice:', this.state.outfit)
+    )
   }
 
   render () {
@@ -79,7 +76,6 @@ export default class App extends React.Component {
           <Ratings_Reviews productId={this.state.currentProduct.id} />
         </div>
         <div id="Questions and Answers">
-          {console.log(this.state.showProduct.name)}
           <Questions_Answers productId={this.state.currentProduct.id} productName={this.state.showProduct.name}/>
         </div>
         <div id="Related Items and Comparison">

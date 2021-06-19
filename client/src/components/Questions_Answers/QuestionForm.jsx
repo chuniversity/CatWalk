@@ -78,7 +78,8 @@ const QuestionForm = (props) => {
 
     axios(config)
       .then(function (response) {
-        ReactDOM.findDOMNode('addQuestionForm').reset()
+        //logic for resetting form inputs here
+        // ReactDOM.findDOMNode('addQuestionForm').reset()
       })
       .catch(function (error) {
         console.log(error);
@@ -102,6 +103,7 @@ const QuestionForm = (props) => {
           style={{'width': 'auto', 'height': '100px'}}
         />
         <br></br>
+        
         <br></br>
         <input
         id="outlined-nickname"
@@ -116,8 +118,8 @@ const QuestionForm = (props) => {
         <Typography variant="caption">
           “For privacy reasons, do not use your full name or email address” 
         </Typography>
-
         <br></br>
+        
         <br></br>
         <input
         id="outlined-email"
@@ -130,15 +132,13 @@ const QuestionForm = (props) => {
         onChange={e => setqEmail(e.target.value)}
         />
         <br></br>
+        
         <Typography variant="caption">
           "For authentication reasons, you will not be emailed"
         </Typography>
-
+        
         <br></br>
         <br></br>
-        
-        
-        
         <button type="submit" variant="outlined" style={{'backgroundColor': '#d5d2d2'}}>Submit Question</button>
       </form>
     </div>
@@ -146,9 +146,10 @@ const QuestionForm = (props) => {
   
   return (
     <>
-      <Button onClick={handleOpen} variant="outlined">
+      <Button onClick={handleOpen} variant="outlined" style={{'backgroundColor': '#e5e4e8'}}>
         Ask question +
       </Button>
+      <br></br>
       <Modal open={open} onClose={handleClose}>
         {body}
       </Modal>

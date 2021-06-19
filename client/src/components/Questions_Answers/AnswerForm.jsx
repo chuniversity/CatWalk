@@ -3,6 +3,7 @@ import { FormControl, Button, Modal, makeStyles, TextField, Typography } from '@
 import access from '../../../../config.js';
 import reactDOM from 'react-dom';
 import axios from 'axios';
+import FormData from 'form-data';
 
 
 //set default position of modal pop up to be middle of screen
@@ -38,6 +39,7 @@ const AnswerForm = (props) => {
   const [aName, setaName] = useState('');
   const [aEmail, setaEmail] = useState('');
   const [aPhotos, setaPhotos] = useState([]);
+  
 
   const handleOpen = () => {
     setOpen(true);
@@ -46,7 +48,6 @@ const AnswerForm = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-  
   
   //form input handlers below
   const handleBodyChange = (answerBody) => {
@@ -57,13 +58,35 @@ const AnswerForm = (props) => {
     }
   }
   
-  const handlePhotoChange = (uploadedPhoto) => {
+  const addPhoto = (photoURL) => {
     if (aPhotos.length <= 5) {
-      setaPhotos([...aPhotos, URL.createObjectURL(uploadedPhoto)])
+      setaPhotos([...aPhotos, URL.createObjectURL(photoURL)])
     } else {
       aPhotos.pop();
-      setaPhotos([...aPhotos, URL.createObjectURL(uploadedPhoto)])
+      setaPhotos([...aPhotos, URL.createObjectURL(photoURL)])
     }
+  }
+  
+  //imgur API for handling photo submissions on answers being posted with photos
+  const uploadPhotoToImgur = (photo) => {
+    var data = new FormData();
+    data.append('image', photo);
+    
+    var config = {
+      method: 'post',
+      url: 'https://api.imgur.com/3/image',
+      headers: { 
+        'Content-type': 'application/x-www-form-urlencoded',
+        'Authorization': access.imgurClientId,
+      },
+      data: data
+    };
+    
+    //upload image to imgur, then take the URL link to that newly uploaded photo
+    //then pass the URL returned from imgur API into addPhoto
+    axios.post(config)
+      .then(response => addPhoto(response.data.data.link))
+      .catch(error => console.error(error));
   }
   
   // POST Request to add answer to API for specific question
@@ -90,14 +113,11 @@ const AnswerForm = (props) => {
         //logic for resetting form inputs here
         // ReactDOM.findDOMNode('addAnswerForm').reset()
       })
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
   }
+  
+  
     
-  
-  
-  
-  
-  
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2>Submit your Answer</h2>
@@ -163,7 +183,7 @@ const AnswerForm = (props) => {
         name="Upload your photos"
         type="file"
         disabled={aPhotos.length >= 5}
-        onChange={e => handlePhotoChange(e.target.files[0])}
+        onChange={e => uploadPhotoToImgur(e.target.files[0])}
         />
 
         <br></br>

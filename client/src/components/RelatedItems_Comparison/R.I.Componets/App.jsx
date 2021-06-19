@@ -13,7 +13,6 @@ export default class App extends React.Component {
       relatedArray: [],
       selected: {}
     }
-    console.log('App check:', this.props.changeCurrentProduct)
   }
 
   componentDidMount () {
@@ -57,11 +56,58 @@ export default class App extends React.Component {
         console.error("error in GET request:", err);
     })
 }
+  changeOnProductId () {
+  if (this.props.productId !== this.state.selected.id && this.state.selected.id !== undefined) {
+    console.log('in this.state.defProductStyle.id')
+    ////////STYLES
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`,
+    {
+      headers: {
+        'Authorization': access.token
+      }
+    }).then((results) => {
+      this.setState({
+        defProductStyle: results.data.results[0]
+      })
+    }).catch(err  => {
+      console.error('Error @ Styles Request:', err)
+    });
+    ///////Realted Array //////////
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/related`,
+    {
+      headers: {
+        'Authorization': access.token
+      }
+    }).then((results) => {
+        this.setState({
+          relatedArray: results.data
+        })
+    }).catch ((err) => {
+        console.error("error in GET request:", err);
+    })
+    /////// PRODUCT REQUEST ///////////
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}`,
+    {
+      headers: {
+        'Authorization': access.token
+      }
+    }).then((results) => {
+        this.setState({
+          selected: results.data
+        })
+    }).catch ((err) => {
+        console.error("error in GET request:", err);
+    })
+  }
+}
+
   render () {
+    this.changeOnProductId()
     return (
     <div>
       <div>
         <RelatedView
+          addToOutfit={this.props.addToOutfit}
           currentItem={this.state.selected}
           changeCurrentProduct={this.props.changeCurrentProduct}
           defaultStyle={this.state.defProductStyle}
@@ -70,6 +116,7 @@ export default class App extends React.Component {
       <div>
         <Typography> OUTFIT!!!! </Typography>
         <OutfitView
+          removeFromOutfit={this.props.removeFromOutfit}
           outfit={this.props.outfit}
           changeCurrentProduct={this.props.changeCurrentProduct}
         />

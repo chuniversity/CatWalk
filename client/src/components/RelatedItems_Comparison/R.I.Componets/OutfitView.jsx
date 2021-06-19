@@ -21,6 +21,7 @@ const OutfitView = (props) => {
         return (
           <OutfitItem
             key={i}
+            removeFromOutfit={props.removeFromOutfit}
             changeCurrentProduct={props.changeCurrentProduct}
             productId={item}
           />

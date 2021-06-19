@@ -1,7 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 import Rating from '@material-ui/lab/Rating';
-import { Card, CardMedia, Button, Typography, Grid } from '@material-ui/core'
+import {
+  Card,
+  CardMedia,
+  CardActions,
+  CardContent,
+  Collapse,
+  CardHeader,
+  Button,
+  Typography,
+  Grid,
+  IconButton
+} from '@material-ui/core';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import access from '../../../../../config.js';
 
 
@@ -17,10 +29,13 @@ class OutfitItem extends React.Component {
     this.state = {
       outFitProduct: {},
       outFitStyle: {photos: [{thumbnail_url: 'http://image10.bizrate-images.com/resize?sq=60&uid=2216744464'}]},
-      outFitRating: 0
+      outFitRating: 0,
+      expanded: false
     }
+    this.handleExpandClick = this.handleExpandClick.bind(this)
+    this.removeFromOutfit = this.removeFromOutfit.bind(this);
   }
-  componentDidMount () {
+  componentDidMount() {
     ////////STYLES REQUEST//////////
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`,
     {
@@ -70,7 +85,17 @@ class OutfitItem extends React.Component {
     }).catch ((err) => {
         console.error("error in GET request ouitfit:", err);
     })
-}
+  }
+  handleExpandClick() {
+    let temp = !this.state.expanded
+    this.setState({
+      expanded: temp
+    })
+  }
+  removeFromOutfit() {
+    this.props.removeFromOutfit(this.props.productId);
+  }
+
   render() {
     return  (
       <Card>
@@ -84,7 +109,7 @@ class OutfitItem extends React.Component {
           onClick={this.props.changeCurrentProduct}
           style={{
             display: 'block',
-            height: '400px',
+            height: '200px',
             width: '100%',
             objectFit: 'cover',
             marginRight: 'auto',
@@ -95,15 +120,35 @@ class OutfitItem extends React.Component {
           media="picture"
           image={this.state.outFitStyle.photos[0].thumbnail_url}
         />
-        <Typography variant='body1'>Product: {this.state.outFitStyle.name}</Typography>
-         <ul>
-            <li>
-              <Typography variant='body2'>Category: {this.state.outFitProduct.category}</Typography>
-            </li>
-            <li>
-              <Typography variant='body2'>Default Price: ${this.state.outFitProduct.default_price}</Typography>
-            </li>
-          </ul>
+         <CardContent>
+          <Collapse in={this.state.expanded}>
+            <Typography variant='body1'>Product: {this.state.outFitStyle.name}</Typography>
+              <ul>
+                <li>
+                  <Typography variant='body2'>Category: {this.state.outFitProduct.category}</Typography>
+                </li>
+                <li>
+                  <Typography variant='body2'>Default Price: ${this.state.outFitProduct.default_price}</Typography>
+                </li>
+              </ul>
+          </Collapse>
+         </CardContent>
+         <CardActions disableSpacing>
+          <IconButton
+            onClick={this.handleExpandClick}
+            aria-expanded={this.state.expanded}
+            aria-label="show more">
+            <ExpandMoreIcon /><Typography> INFO </Typography>
+          </IconButton>
+      </CardActions>
+          <Button
+              variant='contained'
+              onClick={this.removeFromOutfit}
+          >
+            <Typography variant='body1'>
+              Remove from Outfit
+            </Typography>
+          </Button>
       </Card>
 
     )
@@ -113,3 +158,10 @@ class OutfitItem extends React.Component {
 
 
 export default OutfitItem;
+
+{/* <OutfitItem
+key={i}
+removeFromOutfit={props.removeFromOutfit}
+changeCurrentProduct={props.changeCurrentProduct}
+productId={item}
+/> */}

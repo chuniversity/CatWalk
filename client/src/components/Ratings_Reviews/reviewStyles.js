@@ -17,7 +17,7 @@ const reviewStyles = makeStyles({
   rrBoxLMainRating: {
     display: 'grid',
     gridTemplateColumns: '33% 66%',
-    girdGap: '30px',
+    gridGap: '30px',
   },
   rrBoxLMainRatingL: {
     fontSize: '4.0em',
@@ -25,7 +25,13 @@ const reviewStyles = makeStyles({
     opacity: '0.7',
     marginLeft: '3px',
   },
-  rrBoxLMainRatingR: {},
+  rrBoxLMainRatingR: {
+
+  },
+  rrBoxRatingWrapper: {
+    paddingTop: '15px'
+
+  },
   rrBoxLRecommendPercentage: {
     fontSize: '.91rem', 
     marginTop: '20px',
@@ -92,23 +98,24 @@ const reviewStyles = makeStyles({
     fontStretch: 'ultra-condensed',
     whiteSpace: 'nowrap',
     marginTop: '17px',
+    overflow: 'hidden',
   },
   rtileBody: {
     whiteSpace: 'pre-line',
-    /* line-height: 2em; */
+    margin: '10px 0px 20px 0px',
   },
   rtileBodyText: {
     marginTop: '10px',
   },
   rtileRec: {
-    margin: '20px 0px 10px 0px',
+    margin: '10px 0px 20px 0px',
     '& img': {
       padding: '0px 7px 0px 0px',
     },
   },
   rtileRes: {
     backgroundColor: '#ededed',
-    padding: '5px 0px 5px 20px',
+    padding: '10px 0px 10px 20px',
     fontSize: '.9rem',
     opacity: '.8',
   },
@@ -131,18 +138,41 @@ const reviewStyles = makeStyles({
     paddingLeft: '5px',
     paddingRight: '15px',
   },
-  rtileReport: {
+  helpfulLinkFalse: {
+    color: '#242320',
+    '&:hover': {
+      color: '#242320',
+      textDecoration: 'underline',
+    },
+  },
+  helpfulLinkTrue: {
+    color: '#242320',
+    fontWeight: 'bold',
+  },
+  rtileReportFalse: {
     paddingLeft: '13px',
+  },
+  rtileReportTrue: {
+    paddingLeft: '13px',
+    fontWeight: 'bold',
   },
   rtileLinebreak: {
     marginTop: '17px',
   },
+  gridList: {
+    width: 400,
+    height: 75,
+    objectFit: 'cover',
+    padding: '10px 0px 20px 0px',
 
-  
-
+  },
+  gridListClosed: {
+    width: 0,
+    height: 0,
+  },
+  tilePhotos: {
+    padding: '00px 0px 10px 0px',
+  },
 });
-
-
-
 
 export default reviewStyles;

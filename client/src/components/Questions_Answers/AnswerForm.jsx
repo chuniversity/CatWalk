@@ -113,7 +113,7 @@ const AnswerForm = (props) => {
         //logic for resetting form inputs here
         // ReactDOM.findDOMNode('addAnswerForm').reset()
       })
-      .catch(error => console.log(error));
+      .catch(error => console.error(error));
   }
   
   

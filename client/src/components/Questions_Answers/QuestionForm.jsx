@@ -78,7 +78,8 @@ const QuestionForm = (props) => {
 
     axios(config)
       .then(function (response) {
-        ReactDOM.findDOMNode('addQuestionForm').reset()
+        //logic for resetting form inputs here
+        // ReactDOM.findDOMNode('addQuestionForm').reset()
       })
       .catch(function (error) {
         console.log(error);

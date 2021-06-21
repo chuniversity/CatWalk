@@ -113,7 +113,6 @@ export default class App extends React.Component {
           related={this.state.relatedArray} />
       </div>
       <div>
-        <Typography> OUTFIT!!!! </Typography>
         <OutfitView
           removeFromOutfit={this.props.removeFromOutfit}
           outfit={this.props.outfit}

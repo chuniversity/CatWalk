@@ -41,6 +41,7 @@ class Overview extends React.Component {
         },
       },
     }));
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount () {
@@ -128,6 +129,9 @@ class Overview extends React.Component {
     this.setState(
       this.state.allSizes = newAllSizes
     );
+    this.changeSize('Select Size');
+    this.changeQuantity('Select Qty');
+    this.changeGalleryIndex(0);
   }
 
   changeSize (selectedSize) {
@@ -240,17 +244,23 @@ class Overview extends React.Component {
       this.state.gallery = newGallery
     )
   }
+
+  addToCart(num) {
+    this.props.addToCart(num);
+    this.changeSize('Select Size');
+    this.changeQuantity('Select Qty');
+  }
+
   render () {
     this.changeOnProductId();
     return (
       <div>
-        <Typography variant="body1">Product Overview</Typography>
         <Grid container spacing={1} justify='center'>
           <Grid item xs={7}>
               <Gallery photos={this.state.currentStyle.photos} galleryIndex={this.state.gallery.index} changeGalleryIndex={this.changeGalleryIndex.bind(this)}/>
           </Grid>
           <Grid item xs={5} >
-            <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty} galleryIndex={this.state.gallery.index} ratingAverage={this.state.rating.average}/>
+            <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty} galleryIndex={this.state.gallery.index} ratingAverage={this.state.rating.average} addToCart={this.addToCart}/>
           </Grid>
           <Grid item xs={12}>
             <Grid container spacing={10} alignItems='center' justify='center' className={this.classes.root}>

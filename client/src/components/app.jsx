@@ -5,6 +5,7 @@ import Questions_Answers from './Questions_Answers/index.jsx';
 import RelatedItems_Comparison from './RelatedItems_Comparison/index.jsx';
 import axios from 'axios';
 import access from '../../../config.js';
+import MyAppBar from './MyAppBar.jsx';
 
 import { CssBaseline, AppBar, Typography } from '@material-ui/core';
 
@@ -14,7 +15,10 @@ export default class App extends React.Component {
     this.state = {
       outfit: [],
       currentProduct: { id: 27189 },
-      showProduct: {}
+      showProduct: {},
+      cart: {
+        units: 0
+      }
     }
   }
 
@@ -62,15 +66,23 @@ export default class App extends React.Component {
     )
   }
 
+  addToCart (num) {
+    let newUnits = this.state.cart.units + Number(num);
+    let newCart = {
+      units: newUnits
+    }
+    this.setState(
+      this.state.cart = newCart
+    )
+  }
+
   render () {
     return (
       <>
         <CssBaseline />
-        <AppBar position="relative" >
-          <Typography variant="h5" >Project Catwalk</Typography>
-        </AppBar>
+        <MyAppBar cartUnits={this.state.cart.units} />
         <div id="Product Overview">
-          <Product_Overview productId={this.state.currentProduct.id} />
+          <Product_Overview productId={this.state.currentProduct.id} addToCart={this.addToCart.bind(this)}/>
         </div>
         <div id="Ratings and Reviews">
           <Ratings_Reviews productId={this.state.currentProduct.id} />

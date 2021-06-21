@@ -26,7 +26,7 @@ const SelectQuantity = ({ currentQuantity, changeQuantity, arrQty }) => {
     >
       <option value={'Select Quantity'}>Select Qty</option>
       {arrQty.map((item, index) => {
-        if (index < 16) {
+        if (index < 15) {
           return <option key={index} value={item}>{item}</option>;
         }
       })}

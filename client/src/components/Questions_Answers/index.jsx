@@ -40,6 +40,12 @@ export default class Questions_Answers extends React.Component {
     this.isMounted = true;
     this.getQuestions()
   }
+  
+  componentDidUpdate(prevProps) {
+    if (this.props.productId !== prevProps.productId && this.isMounted === true) {
+      this.getQuestions();
+    }
+  }
 
   componentWillUnmount() {
     this.isMounted = false;

@@ -98,16 +98,29 @@ export default class AnswersList extends React.Component {
               </Typography>
               <br></br>
               {answer.photos.map((photo, k) => {
-                return <img
-                src={photo}
-                key={`img_${k}`}
-                style={{
-                  'border': '1px solid #ddd',
-                  'borderRadius': '4px',
-                  'padding': '5px',
-                  'height': '165px'
-                }}
-                />
+                if (photo) {
+                  return <img
+                  src={photo}
+                  key={`img_${k}`}
+                  style={{
+                    'border': '1px solid #ddd',
+                    'borderRadius': '4px',
+                    'padding': '5px',
+                    'height': '165px'
+                  }}
+                  />
+                } else {
+                  return <img
+                  src="https://ae01.alicdn.com/kf/HTB1VuKkHFXXXXaraXXXq6xXFXXXD/Hot-2018-Spring-Autumn-Lace-Up-Men-s-Canvas-Shoes-Big-Size-Man-Buckle-Casual-Ankle.jpg"
+                  key={`img_${k}`}
+                  style={{
+                    'border': '1px solid #ddd',
+                    'borderRadius': '4px',
+                    'padding': '5px',
+                    'height': '165px'
+                  }}
+                  />
+                }
               })}
             </Card>
             <br></br>

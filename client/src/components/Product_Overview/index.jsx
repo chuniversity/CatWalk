@@ -131,6 +131,7 @@ class Overview extends React.Component {
     );
     this.changeSize('Select Size');
     this.changeQuantity('Select Qty');
+    this.changeGalleryIndex(0);
   }
 
   changeSize (selectedSize) {

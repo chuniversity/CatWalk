@@ -55,7 +55,6 @@ export default class Questions_Answers extends React.Component {
     const {questions, answers} = this.state;
     return (
       <Container >
-        {console.log(this.props.productName)}
         <br></br>
         <Typography variant="h5">Questions and Answers</Typography>
         <QuestionsList questions={questions} productName={this.props.productName}/>

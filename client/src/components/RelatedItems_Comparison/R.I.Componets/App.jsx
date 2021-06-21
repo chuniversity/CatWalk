@@ -58,7 +58,6 @@ export default class App extends React.Component {
 }
   changeOnProductId () {
   if (this.props.productId !== this.state.selected.id && this.state.selected.id !== undefined) {
-    console.log('in this.state.defProductStyle.id')
     ////////STYLES
     axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`,
     {
@@ -114,7 +113,6 @@ export default class App extends React.Component {
           related={this.state.relatedArray} />
       </div>
       <div>
-        <Typography> OUTFIT!!!! </Typography>
         <OutfitView
           removeFromOutfit={this.props.removeFromOutfit}
           outfit={this.props.outfit}

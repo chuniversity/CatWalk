@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize, currentSize, allSizes, currentQuantity, changeQuantity, arrQty, galleryIndex, ratingAverage }) => {
+const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize, currentSize, allSizes, currentQuantity, changeQuantity, arrQty, galleryIndex, ratingAverage, addToCart }) => {
 
   const classes = useStyles();
 
   const shareUrl = 'https://github.com/thefozzies/FEC';
-  const shareTitle = `I am loving the ${product.name} from {the company name}`;
+  const shareTitle = `I am loving the ${product.name} from LiWare`;
   let mediaImg = currentStyle.photos === undefined ? 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80':currentStyle.photos[galleryIndex].url ;
 
   const disableFunc = () => {
@@ -35,6 +35,10 @@ const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize,
     }
     return false;
   }
+
+  const addToCartT = ()=> {
+    addToCart(currentQuantity.quantity);
+  };
 
   return (
     <div className={classes.root}>
@@ -64,7 +68,7 @@ const ProductAppeal = ({ product, styles, currentStyle, changeStyle, changeSize,
           <SelectQuantity currentQuantity={currentQuantity} changeQuantity={changeQuantity} arrQty={arrQty}/>
         </Grid>
         <Grid item xs={6}>
-          <Fab disabled={disableFunc()} variant='extended'>
+          <Fab disabled={disableFunc()} onClick={addToCartT} variant='extended'>
             <Grid container spacing={0} justify='center'>
               <Grid item xs={10}>
                 <Typography variant='subtitle2'>Add to Cart</Typography>

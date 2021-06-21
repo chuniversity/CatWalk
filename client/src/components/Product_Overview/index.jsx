@@ -41,64 +41,74 @@ class Overview extends React.Component {
         },
       },
     }));
+    this.addToCart = this.addToCart.bind(this);
   }
 
   componentDidMount () {
-    const newProduct = this.props.showProduct;
-      this.setState(
-        this.state.product = newProduct
-      );
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`, {
-          headers: {
-            'Authorization': access.token
-          }
-      }).then( data => {
-        const newStyles = data.data.results;
-        let newCurrentStyle = {};
-        this.setState(
-          this.state.styles = newStyles
-        );
-        newStyles.map(item => {
-          if (item['default?']) {
-            newCurrentStyle = item;
-          }
-        });
-        this.setState(
-          this.state.currentStyle = newCurrentStyle
-        );
-        let newAllSizes = [];
-        const currentSkus = this.state.currentStyle.skus;
-        for (let key in currentSkus) {
-          newAllSizes.push(currentSkus[key].size);
-        }
-        this.setState(
-          this.state.allSizes = newAllSizes
-        )
-      }).catch(err => {
-        console.error(err);
-      });
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/reviews/meta?product_id=${this.props.productId}`,
-      {
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}`, {
         headers: {
           'Authorization': access.token
         }
-      }).then((results) => {
-        let ratings = results.data.ratings;
-        var responseTotal = 0;
-        let scoreTotal = 0;
-        for (let key in ratings) {
-          let temp = ratings[key];
-          responseTotal = responseTotal + Number(temp);
-          scoreTotal += key * temp;
+    }).then(data => {
+      const newProduct = data.data;
+      this.setState(
+        this.state.product = newProduct
+      );
+      return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`, {
+        headers: {
+          'Authorization': access.token
         }
-        let result = scoreTotal / responseTotal;
-        const newRating = { average: result};
-        this.setState(
-          this.state.rating = newRating
-        )})
-        .catch((err) =>{
-            console.error("error @overview review get:" , err);
+      })
+    }).then( data => {
+      const newStyles = data.data.results;
+      let newCurrentStyle = {};
+      this.setState(
+        this.state.styles = newStyles
+      );
+      newStyles.map(item => {
+        if (item['default?']) {
+          newCurrentStyle = item;
+        }
       });
+      this.setState(
+        this.state.currentStyle = newCurrentStyle
+      );
+      let newAllSizes = [];
+      const currentSkus = this.state.currentStyle.skus;
+      for (let key in currentSkus) {
+        newAllSizes.push(currentSkus[key].size);
+      }
+      this.setState(
+        this.state.allSizes = newAllSizes
+      )
+    }).catch(err => {
+      console.error(err);
+    });
+    /**********************************
+     *        Star Reviews
+     **********************************/
+    axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/reviews/meta?product_id=${this.props.productId}`,
+    {
+      headers: {
+        'Authorization': access.token
+      }
+    }).then((results) => {
+      let ratings = results.data.ratings;
+      var responseTotal = 0;
+      let scoreTotal = 0;
+      for (let key in ratings) {
+        let temp = ratings[key];
+        responseTotal = responseTotal + Number(temp);
+        scoreTotal += key * temp;
+      }
+      let result = scoreTotal / responseTotal;
+      const newRating = { average: result};
+      this.setState(
+        this.state.rating = newRating
+      )})
+      .catch((err) =>{
+          console.error("error @ review get:" , err);
+    });
   }
 
   changeStyle (newStyleId) {
@@ -119,6 +129,9 @@ class Overview extends React.Component {
     this.setState(
       this.state.allSizes = newAllSizes
     );
+    this.changeSize('Select Size');
+    this.changeQuantity('Select Qty');
+    this.changeGalleryIndex(0);
   }
 
   changeSize (selectedSize) {
@@ -158,15 +171,21 @@ class Overview extends React.Component {
   }
 
   changeOnProductId () {
-    if (this.props.showProduct.id !== this.state.product.id && this.state.product.id !== undefined) {
-      const newProduct = this.props.showProduct;
-      this.setState(
-        this.state.product = newProduct
-      );
-      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`, {
+    if (this.props.productId !== this.state.product.id && this.state.product.id !== undefined) {
+      axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}`, {
+        headers: {
+          'Authorization': access.token
+        }
+      }).then(data => {
+        const newProduct = data.data;
+        this.setState(
+          this.state.product = newProduct
+        );
+        return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-atx/products/${this.props.productId}/styles`, {
           headers: {
             'Authorization': access.token
           }
+        })
       }).then( data => {
         const newStyles = data.data.results;
         let newCurrentStyle = {};
@@ -212,7 +231,7 @@ class Overview extends React.Component {
           this.state.rating = newRating
         )})
         .catch((err) =>{
-            console.error("error @ overview review get:" , err);
+            console.error("error @ review get:" , err);
       });
     }
   }
@@ -225,17 +244,23 @@ class Overview extends React.Component {
       this.state.gallery = newGallery
     )
   }
+
+  addToCart(num) {
+    this.props.addToCart(num);
+    this.changeSize('Select Size');
+    this.changeQuantity('Select Qty');
+  }
+
   render () {
     this.changeOnProductId();
     return (
       <div>
-        <Typography variant="body1">Product Overview</Typography>
         <Grid container spacing={1} justify='center'>
           <Grid item xs={7}>
               <Gallery photos={this.state.currentStyle.photos} galleryIndex={this.state.gallery.index} changeGalleryIndex={this.changeGalleryIndex.bind(this)}/>
           </Grid>
           <Grid item xs={5} >
-            <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty} galleryIndex={this.state.gallery.index} ratingAverage={this.state.rating.average}/>
+            <ProductAppeal product={this.state.product} styles={this.state.styles} currentStyle={this.state.currentStyle} changeStyle={this.changeStyle.bind(this)} changeSize={this.changeSize.bind(this)} currentSize={this.state.currentSize} allSizes={this.state.allSizes} currentQuantity={this.state.currentQuantity} changeQuantity={this.changeQuantity.bind(this)} arrQty={this.state.arrQty} galleryIndex={this.state.gallery.index} ratingAverage={this.state.rating.average} addToCart={this.addToCart}/>
           </Grid>
           <Grid item xs={12}>
             <Grid container spacing={10} alignItems='center' justify='center' className={this.classes.root}>

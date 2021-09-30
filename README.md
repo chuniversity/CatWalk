@@ -10,7 +10,7 @@ Overhauling an outdated client-facing retail web-portal that has been hurting th
 
 ## Description
 
-For this project I was responsible for a ratings and review component for a typical e-commerce landing page. This was accomplished with a mix of Class components and child functional components. See client/src/Ratings_Reviews
+For this project I was responsible for a ratings and review component for a typical e-commerce landing page. This was accomplished with a mix of Class components and child functional components. See client/src/components/Ratings_Reviews
 
 
 
